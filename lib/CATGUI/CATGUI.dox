@@ -1,0 +1,9 @@
+/// \defgroup CATGUI GUI Application library for CAT
+/// \ingroup CAT
+///
+/// \section catgui CATGUI GUI Application library for \ref catlib
+///
+/// This library contains all of the GUI / Application framework code
+/// to be used with the CAT library.
+///
+/// CAT is released under an MIT-style License - see Copying.txt.

@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CATStringTable name="CATStringCore">
+  <!-- Success -->
+  <CATString id="CAT_SUCCESS"                           value="0x00000000"    eng="Success"
+                                                                              chn="狀態" />  
+  <!-- Status Codes -->
+  <CATString id="CAT_STATUS"                            value="0x00000001"    eng="Status"
+                                                                              chn="狀態" />
+  <CATString id="CAT_STAT_FILE_AT_EOF"                  value="0x00000002"    eng="The file is at EOF"
+                                                                              chn="該文件是在EOF" />
+  <CATString id="CAT_STAT_MULTIPLE_PROCS"               value="0x00000003"    eng="Multiple matching processes found." 
+                                                                              chn="找到多個匹配過程"/>  
+  <CATString id="CAT_STAT_PATH_NO_FILE"                 value="0x00000004"    eng="No filename present." 
+                                                                              chn="沒有文件名存在。" />
+  <CATString id="CAT_STAT_PATH_NO_DIRECTORY"            value="0x00000005"    eng="No directory present." 
+                                                                              chn="無目錄中存在。" />
+  <CATString id="CAT_STAT_PATH_IS_DIRECTORY"            value="0x00000006"    eng="The path is a directory." 
+                                                                              chn="路徑是一個目錄。" />
+  <CATString id="CAT_STAT_PATH_IS_FILE"                 value="0x00000007"    eng="The path is a file." 
+                                                                              chn="路徑是一個文件。" />
+  <CATString id="CAT_STAT_PROMPT_OK"                    value="0x00000008"    eng="OK" 
+                                                                              chn="行" />
+  <CATString id="CAT_STAT_PROMPT_YES"                   value="0x00000009"    eng="Yes" 
+                                                                              chn="是" />
+  <CATString id="CAT_STAT_PROMPT_NO"                    value="0x0000000A"    eng="No" 
+                                                                              chn="沒有" />
+  <CATString id="CAT_STAT_PROMPT_CANCEL"                value="0x0000000B"    eng="Cancel" 
+                                                                              chn="取消" />
+  <CATString id="CAT_STAT_IN_PROGRESS"                  value="0x0000000C"    eng="Progress" 
+                                                                              chn="進展" />
+  <CATString id="CAT_STAT_IMAGE_ALREADY_LOADED"         value="0x0000000D"    eng="Image already loaded." 
+                                                                              chn="圖片已經加載。" />
+  <CATString id="CAT_STAT_CONTROL_IMAGE_SIZE_MISMATCH"  value="0x0000000E"    eng="Image size mismatch in control." 
+                                                                              chn="圖像大小不匹配對照。" />
+  <CATString id="CAT_STAT_SKIN_WINDOW_ALREADY_OPEN"     value="0x0000000F"    eng="Window already open." 
+                                                                              chn="窗口已經打開。" />
+  <CATString id="CAT_STAT_SQL_ROW"                      value="0x00001001"    eng="sqlite3_step() has another row ready" />
+  <CATString id="CAT_STAT_SQL_DONE"                     value="0x00001002"    eng="sqlite3_step() has finished executing" />
+
+  <!-- Normal Strings -->
+  <CATString id="CAT_STR_EMPTY"                         value="0x10000000"    eng="" chn="" />
+  <CATString id="CAT_STR_USAGE"                         value="0x10000001"    eng="Usage:" 
+                                                                              chn="用法：" />
+  <CATString id="CAT_STR_HELPDESC"                      value="0x10000002"    eng="Display Help." 
+                                                                              chn="顯示幫助。" />
+
+  <CATString id="CAT_STR_MIKE_RESUME_LINE6"             value="0x11000000"    eng="Senior Software Engineer (Telecommute - 2001-3, 2007-present)&#x0d; POD Farm 1 - 2.5 (AU/RTAS/VST plugin and standalone Amp/FX modeler):&#x0d; * Ported core libraries used in multiple projects to 64-bit for Mac and Win&#x0d; * Reworked and maintained core libraries and DRM&#x0d; * Designed and built SQLite-based tone database subsystem for POD Farm 2&#x0d; * Developed controls and user interface for tone browsing&#x0d; * Built UTF-8/XML based internationalized string and error handling system using Expat&#x0d; * Developed, debugged, and maintained 32-bit and 64-bit C++ on Mac OS X and Windows&#x0d; * Tracked down and resolved incompatibilities and bugs in 3rd party DAWs&#x0d; * Various GUI and backend development&#x0d;&#x0d; Guitarport 1 and 2 (Amp/FX modeling application):&#x0d; * Designed and developed CD Ripping engine for 2.0 and above&#x0d; * Designed and developed Networking engine for 1.14 and above&#x0d; * Created installaters for the application and drivers with NSIS&#x0d; * Added Crash handling, automated reporting, and internal debugging&#x0d; * Built resource, string, and font management for 2.0 and above&#x0d; * Integrated an embedded web browser and added custom javascript hooks&#x0d; * Developed Guitar Tuner user interface&#x0d; * Created tools for System Requirements and Diagnostics&#x0d;" />
+  
+  <CATString id="CAT_STR_MIKE_RESUME_REFLECT"           value="0x11000001"    eng="Senior Software Developer (2005-2008)&#x0d; ReflectPlayer v2.x (enterprise digital signage client)&#x0d; * Designed and developed the ReflectPlayer digital signage client on Windows w/DirectShow&#x0d; * Designed and developed dynamic XML-based skinning architecture&#x0d; * Ported ReflectPlayer to Window CE devices.&#x0d; * Developed plug-in architecture and plug-ins to customize ReflectPlayer to customers needs.&#x0d; * Integrated video capture, digital I/O, and other devices into ReflectPlayer&#x0d; * Added features to synchronize multiple videos across monitor outputs&#x0d; * Created OpenGL/VMR9 based prototype&#x0d;" />
+  
+  <CATString id="CAT_STR_MIKE_RESUME_IRSI"              value="0x11000002"    eng="Senior Software Engineer (Remote - 1997-2000)&#x0d; AIMS 1.x and 2.x (Optical PCB defect detection system)&#x0d; * Threaded a previously monolithic system and optimized hardware and processing activities&#x0d; * Developed image acquisition and distribution subsystem&#x0d; * Optimized image processing algorithms and ported to MMX assembler&#x0d; * Developed analysis tools to debug and diagnose issues with defect recognition&#x0d; * Various work on GUI and back end systems&#x0d; * Worked onsite with customers in Taiwan and China.&#x0d;" />
+  
+  <CATString id="CAT_STR_MIKE_RESUME_PST"               value="0x11000003"    eng="Software Engineer (1996-1997)&#x0d; Wafer Handling Systems:&#x0d; * Developed custom actions for customers.&#x0d; * Analysed and debugged issues in the office and field.&#x0d; * Developed software for various wafer robotics systems.&#x0d; * Maintained sorter and defect analysis software&#x0d;" />
+  
+  <!-- Error Codes -->  
+  <CATString id="CAT_ERROR"                             value="0x80000000" 		eng="Error" 
+                                                                              chn="錯誤" />
+  <CATString id="CAT_ERR_NOT_IMPLEMENTED"               value="0x80000001" 		eng="Feature not yet implemented." 
+                                                                              chn="功能尚未實現。"/>
+  <CATString id="CAT_ERR_FILE_NOT_FOUND"                value="0x80000002" 		eng="File not found." 
+                                                                              chn="未找到文件。" />
+  <CATString id="CAT_ERR_UNABLE_TO_OPEN_PROCESS"        value="0x80000003" 		eng="Unable to open process." 
+                                                                              chn="無法打開的過程。"/>  
+  <CATString id="CAT_ERR_REMOTE_ALLOC_RAM"              value="0x80000004" 		eng="Unable to allocate memory in remote process."
+                                                                              chn="無法分配內存在遠程進程。" />
+  <CATString id="CAT_ERR_REMOTE_WRITE"                  value="0x80000005" 		eng="Unable to write to remote process."
+                                                                              chn="無法寫入到遠程進程。" />
+  <CATString id="CAT_ERR_REMOTE_CREATE_THREAD"          value="0x80000006" 		eng="Unable to create a thread in the remote process."
+                                                                              chn="無法創建一個線程在遠程進程。" />
+  <CATString id="CAT_ERR_REMOTE_THREAD_TIMEOUT"         value="0x80000007" 		eng="Remote thread timed out."
+                                                                              chn="遠程線程超時。" />
+  <CATString id="CAT_ERR_REMOTE_THREAD_INVALID_EXIT"    value="0x80000008" 		eng="Remote thread exited with an error."
+                                                                              chn="遠程線程退出並返回一個錯誤。" />
+  <CATString id="CAT_ERR_PROCESS_CREATE"                value="0x80000009" 		eng="Error creating process"
+                                                                              chn="錯誤創建進程" />
+  <CATString id="CAT_ERR_INVALID_PARAM"                 value="0x8000000a" 		eng="Invalid parameter"
+                                                                              chn="無效的參數" />
+  <CATString id="CAT_ERR_OUT_OF_MEMORY"                 value="0x8000000b" 		eng="Out of memory"
+                                                                              chn="內存不足" />
+  <CATString id="CAT_ERR_FILE_OPEN"                     value="0x8000000c" 		eng="Error opening file."
+                                                                              chn="錯誤打開文件。" />
+  <CATString id="CAT_ERR_FILE_READ"                     value="0x8000000d" 		eng="Error reading from file"
+                                                                              chn="從文件讀取錯誤" />
+  <CATString id="CAT_ERR_FILE_HAS_OPEN_SUBSTREAMS"      value="0x8000000e" 		eng="Attempting to close a file with open substreams."
+                                                                              chn="試圖關閉一個文件開放 substreams。" />
+  <CATString id="CAT_ERR_FILE_NOT_OPEN"                 value="0x8000000f" 		eng="The file has not been opened."
+                                                                              chn="該文件沒有打開過。" />
+  <CATString id="CAT_ERR_FILE_UNSUPPORTED_MODE"         value="0x80000010" 		eng="The requested open mode is not supported."
+                                                                              chn="請求的開放模式不支持。" />
+  <CATString id="CAT_ERR_FILE_WRITE"                    value="0x80000011" 		eng="Error writing to file."
+                                                                              chn="寫入文件時出錯。" />
+  <CATString id="CAT_ERR_FILE_GET_POSITION"             value="0x80000012" 		eng="Error retrieving file position."
+                                                                              chn="錯誤檢索文件的位置。" />
+  <CATString id="CAT_ERR_FILE_SEEK"                     value="0x80000013" 		eng="Error seeking within file."
+                                                                              chn="錯誤文件內尋求。" />
+  <CATString id="CAT_ERR_FILE_SET_POSITION"             value="0x80000014" 		eng="Error setting the file position."
+                                                                              chn="錯誤設置文件位置。" />
+  <CATString id="CAT_ERR_OPENING_SUBSTREAM"             value="0x80000015" 		eng="Opening a substream is not a valid operation."
+                                                                              chn="打開一個子流是不是一個有效的運作。" />
+  <CATString id="CAT_ERR_CLOSING_SUBSTREAM"             value="0x80000016" 		eng="Closing a substream is not a valid operation."
+                                                                              chn="關閉一子流是不是一個有效的運作。" />
+  <CATString id="CAT_ERR_SUBSTREAM_NO_PARENT"           value="0x80000017" 		eng="Substream has no parent."
+                                                                              chn="子流沒有父。" />
+  <CATString id="CAT_ERR_WRITE_PAST_SPECIFIED_END"      value="0x80000018" 		eng="A write request was made past the end of a substream."
+                                                                              chn="一個寫請求結束了過去的一個子流。" />
+  <CATString id="CAT_ERR_SEEK_PAST_SPECIFIED_END"       value="0x80000019" 		eng="A seek request was made past the end of a substream."
+                                                                              chn="尋求一個請求結束了過去的一個子流。" />
+  <CATString id="CAT_ERR_STRINGTABLE_NOT_FOUND"         value="0x8000001a" 		eng="Stringtable was not found for removal."
+                                                                              chn="字串未找到要刪除的。" />
+  <CATString id="CAT_ERR_CMD_TABLE_INVALID"             value="0x8000001b" 		eng="Invalid command table for command line parsing."
+                                                                              chn="無效的命令表命令行解析。" />
+  <CATString id="CAT_ERR_CMD_INVALID_SWITCH"            value="0x8000001c" 		eng="Invalid switch on command line."
+                                                                              chn="無效的命令行開關。" />
+  <CATString id="CAT_ERR_CMD_NO_STRINGTABLE"            value="0x8000001d" 		eng="No string table."
+                                                                              chn="沒有字符串表。" />
+  <CATString id="CAT_ERR_PARSE_CALLBACK_ABORT"          value="0x8000001e" 		eng="Callback during cmd line parsing aborted."
+                                                                              chn="回調在加利福尼亞行解析中止。" />
+  <CATString id="CAT_ERR_ENUM_PROCS"                    value="0x8000001f" 		eng="An error occurred enumerating processes."
+                                                                              chn="出錯枚舉進程。" />
+  <CATString id="CAT_ERR_NO_MATCHING_PROC"              value="0x80000020" 		eng="No matching process found."
+                                                                              chn="找不到匹配的過程中發現。" />
+  <CATString id="CAT_ERR_READING_TARGET_EXEC"           value="0x80000021" 		eng="Error reading target executable."
+                                                                              chn="錯誤閱讀對象的可執行文件。" />
+  <CATString id="CAT_ERR_EXE_NOT_PE_FORMAT"             value="0x80000022" 		eng="Target is not in Portable Executable format."
+                                                                              chn="目標是不是可移植可執行文件格式。" />
+  <CATString id="CAT_ERR_CMDREQ_GROUP"                  value="0x80000023" 		eng="Required command-line group not found."
+                                                                              chn="所需的命令行組未發現。" />
+  <CATString id="CAT_ERR_CMDREQ_EXCLUSIVE_GROUP"        value="0x80000024" 		eng="Multiple options set in exclusive group on command line."
+                                                                              chn="設置多個選項以獨占組命令行。" />
+  <CATString id="CAT_ERR_CMDREQ_OP"                     value="0x80000025" 		eng="Required operand not found on command line."
+                                                                              chn="找不到所需的操作數在命令行。" />
+  <CATString id="CAT_ERR_CMDREQ_SWITCH"                 value="0x80000026" 		eng="Required switch not found on command line."
+                                                                              chn="找不到所需的開關在命令行。" />
+  <CATString id="CAT_ERR_CMD_SWITCH_NO_ARG"             value="0x80000027" 		eng="A switch on the command line is missing a required argument."
+                                                                              chn="A開關的命令行是缺少必要的參數。" />
+  <CATString id="CAT_ERR_UNPATCH_TIMEOUT"               value="0x80000028" 		eng="Timed out waiting for target process patch."
+                                                                              chn="超時等待目標進程補丁。" />
+  <CATString id="CAT_ERR_HOOK_PROTECT_FAILED"           value="0x80000029" 		eng="Setting memory protections failed when hooking function."
+                                                                              chn="設置內存保護失敗時，掛鉤函數。" />
+  <CATString id="CAT_ERR_HOOK_NOT_FOUND"                value="0x8000002a" 		eng="Hook target function not found."
+                                                                              chn="掛鉤目標函數找不到。" />
+  <CATString id="CAT_ERR_HOOK_NOT_ENOUGH_BYTES"         value="0x8000002b" 		eng="Not enough bytes for push/jmp in hook."
+                                                                              chn="沒有足夠的字節推/就業選配計劃在掛鉤。" />
+  <CATString id="CAT_ERR_INTERCEPT_NO_DSOUND"           value="0x8000002c" 		eng="Could not find DirectSound DLL."
+                                                                              chn="找不到DirectSound的DLL中。" />
+  <CATString id="CAT_ERR_XML_CREATE_FAILED"             value="0x8000002d" 		eng="Could not create XML object."
+                                                                              chn="無法創建 XML對象。" />
+  <CATString id="CAT_ERR_XML_INVALID_ATTRIBUTE"         value="0x8000002e" 		eng="Invalid attribute in XML."
+                                                                              chn="無效的屬性的XML。" />
+  <CATString id="CAT_ERR_XML_PARSER_INVALID_PATH"       value="0x8000002f" 		eng="Invalid XML path."
+                                                                              chn="無效的XML路徑。" />
+  <CATString id="CAT_ERR_XML_PARSER_OUT_OF_MEMORY"      value="0x80000030" 		eng="XML Parser out of memory."
+                                                                              chn="XML分析器內存不足。" />
+  <CATString id="CAT_ERR_XML_INVALID_XML"               value="0x80000031" 		eng="Invalid XML file."
+                                                                              chn="無效的XML文件。" />
+  <CATString id="CAT_ERR_IMAGE_NULL"                    value="0x80000032" 		eng="Null image."
+                                                                              chn="空的形象。" />
+  <CATString id="CAT_ERR_IMAGE_INVALID_SUB_POSITION"    value="0x80000033"    eng="Invalid sub-image position."
+                                                                              chn="無效的子圖像的位置。" />
+  <CATString id="CAT_ERR_IMAGE_INVALID_SIZE"            value="0x80000034"    eng="Invalid image size."
+                                                                              chn="無效的圖片的大小。" />
+  <CATString id="CAT_ERR_IMAGE_MUST_INITIALIZE"         value="0x80000035"    eng="Must initialize image first."
+                                                                              chn="首先必須初始化的形象。" />
+  <CATString id="CAT_ERR_IMAGE_FILL_OUT_OF_BOUNDS"        value="0x80000036"  eng="Image fill request is out of bounds."
+                                                                              chn="圖像填充要求是出界。" />
+  <CATString id="CAT_ERR_IMAGE_OPERATION_INVALID_ON_ROOT" value="0x80000037"  eng="The image operation is invalid on root image."
+                                                                              chn="圖像操作是無效的根形象。" />
+  <CATString id="CAT_ERR_IMAGE_EMPTY"                   value="0x80000038"    eng="The image is empty."
+                                                                              chn="圖像是空的。" />
+  <CATString id="CAT_ERR_IMAGE_OUT_OF_RANGE"            value="0x80000039"  	eng="Out of range of image size."
+                                                                              chn="超出範圍的圖像的大小。" />
+  <CATString id="CAT_ERR_IMAGE_OVERLAY_OUT_OF_BOUNDS"   value="0x8000003a"  	eng="Image overlay out of range."
+                                                                              chn="圖像疊加超出範圍。" />
+  <CATString id="CAT_ERR_PNG_ERROR_CREATING_READ"       value="0x8000003b"    eng="Error creating read struct for .png image."
+                                                                              chn="錯誤創建讀取結構體。PNG圖像。" />
+  <CATString id="CAT_ERR_PNG_UNSUPPORTED_FORMAT"        value="0x8000003c"    eng="Unsupported PNG format - 3 or 4 channel only."
+                                                                              chn="不支持PNG格式 - 3或4通道只。" />
+  <CATString id="CAT_ERR_IMAGE_UNKNOWN_FORMAT"          value="0x8000003d"    eng="Unsupported image format."
+                                                                              chn="不支持的圖像格式。" />
+  <CATString id="CAT_ERR_PNG_CORRUPT"                   value="0x8000003e"    eng=".PNG image file is corrupt."
+                                                                              chn="PNG圖像文件已損壞。" />
+  <CATString id="CAT_ERR_PNG_ERROR_CREATING_WRITE"      value="0x8000003f"    eng="Error creating write struct for .png image."
+                                                                              chn="錯誤創建寫結構體。PNG圖像。" />
+  <CATString id="CAT_ERR_PNG_WARNING"                   value="0x80000040"    eng="Warning received from .png library."
+                                                                              chn="警告收到。巴紐庫。" />
+  <CATString id="CAT_ERR_MUTEX_INVALID_HANDLE"          value="0x80000041"    eng="Invalid mutex handle."
+                                                                              chn="無效的互斥處理。" />
+  <CATString id="CAT_ERR_MUTEX_TIMEOUT"                 value="0x80000042"    eng="Mutex timed out."
+                                                                              chn="互斥超時。" />
+  <CATString id="CAT_ERR_MUTEX_WAIT_ERROR"              value="0x80000043"    eng="Error waiting on mutex."
+                                                                              chn="錯誤等待互斥。" />
+  <CATString id="CAT_ERR_SIGNAL_INVALID_HANDLE"         value="0x80000044"  	eng="Invalid handle for signal."
+                                                                              chn="無效的處理信號。" />
+  <CATString id="CAT_ERR_SIGNAL_TIMEOUT"                value="0x80000045"  	eng="Signal timed out."
+                                                                              chn="信號超時。" />
+  <CATString id="CAT_ERR_SIGNAL_WAIT_ERROR"             value="0x80000046"  	eng="Error waiting for signal."
+                                                                              chn="錯誤等待信號。" />
+  <CATString id="CAT_ERR_FILE_ALREADY_EXISTS"           value="0x80000047"  	eng="File already exists."
+                                                                              chn="文件已存在。" />
+  <CATString id="CAT_ERR_PATH_EMPTY"                    value="0x80000048"  	eng="The path is empty."
+                                                                              chn="路徑是空的。" />
+  <CATString id="CAT_ERR_FILE_DOES_NOT_EXIST"           value="0x80000049"  	eng="The file does not exist."
+                                                                              chn="該文件不存在。" />
+  <CATString id="CAT_ERR_FILE_IS_DIRECTORY"             value="0x8000004a"  	eng="The path is a directory."
+                                                                              chn="路徑是一個目錄。" />
+  <CATString id="CAT_ERR_DIR_DOES_NOT_EXIST"            value="0x8000004b"  	eng="The directory does not exist."
+                                                                              chn="目錄不存在。" />
+  <CATString id="CAT_ERR_DIR_IS_FILE"                   value="0x8000004c"  	eng="The path is a file."
+                                                                              chn="路徑是一個文件。" />
+  <CATString id="CAT_ERR_NULL_PARAM"                    value="0x8000004d"  	eng="Null parameter."
+                                                                              chn="NULL參數。" />
+  <CATString id="CAT_ERR_FILESYSTEM_CREATE_DIR"         value="0x8000004e"  	eng="Filesystem is unable to create the directory."
+                                                                              chn="文件系統無法創建目錄。" />
+  <CATString id="CAT_ERR_PATH_DOES_NOT_EXIST"           value="0x8000004f"  	eng="The path does not exist."
+                                                                              chn="路徑不存在。" />
+  <CATString id="CAT_ERR_FIND_NO_MATCHES"               value="0x80000050"  	eng="No matches found."
+                                                                              chn="沒有找到相匹配。" />
+  <CATString id="CAT_ERR_FIND_CALL_FINDFIRST"           value="0x80000051"  	eng="Must call FindFirst before FindNext."
+                                                                              chn="之前必須調用 FindFirst FindNext。" />
+  <CATString id="CAT_ERR_FIND_END"                      value="0x80000052"  	eng="No more matches."
+                                                                              chn="沒有更多的匹配。" />
+  <CATString id="CAT_ERR_SKIN_XPIN_MISUSE" 		          value="0x80000053"  	eng="XPos must be positive, XPin must be negative, and Width may not be used for scaled skin controls."
+                                                                              chn="XPos必須是積極的，XPin必須是否定的，和寬度可能 不能用於皮膚規模控制。" />
+  <CATString id="CAT_ERR_SKIN_YPIN_MISUSE" 		          value="0x80000054"  	eng="YPos must be positive, YPin must be negative, and Width may not be used for scaled skin controls."
+                                                                              chn="YPos必須是積極的，YPin必須是否定的，和寬度可能 不能用於皮膚規模控制。" />
+  <CATString id="CAT_ERR_QUEUE_EMPTY" 		              value="0x80000055"  	eng="Queue is empty."
+                                                                              chn="隊列是空的。" />
+  <CATString id="CAT_ERR_FILE_CORRUPTED" 		            value="0x80000056"  	eng="File is corrupted."
+                                                                              chn="文件已損壞。" />
+  <CATString id="CAT_ERR_FILE_ACCESS_DENIED" 		        value="0x80000057"  	eng="Access denied to file."
+                                                                              chn="拒絕訪問到文件。" />
+  <CATString id="CAT_ERR_EXECUTE_FAILED" 		            value="0x80000058"  	eng="Failed to execute file."
+                                                                              chn="無法執行文件。" />
+  <CATString id="CAT_ERR_WINDOW_CLASSREG_FAILED" 		    value="0x80000059"  	eng="Window class registration failed."
+                                                                              chn="窗口類註冊失敗。" />
+  <CATString id="CAT_ERR_WINDOW_CREATE_FAILED" 		      value="0x8000005a"  	eng="Window creation failed."
+                                                                              chn="窗口創建失敗。" />
+  <CATString id="CAT_ERR_STACK_EMPTY" 		              value="0x8000005b"  	eng="Stack is empty."
+                                                                              chn="堆棧是空的。" />
+  <CATString id="CAT_ERR_NO_HELP_AVAILABLE" 		        value="0x8000005c"  	eng="No help available."
+                                                                              chn="沒有幫助可用。" />
+  <CATString id="CAT_ERR_FILEOPEN_CANCELLED" 		        value="0x8000005d"  	eng="File Open dialog was cancelled."
+                                                                              chn="文件打開對話框被取消。" />
+  <CATString id="CAT_ERR_FILESAVE_CANCELLED" 		        value="0x8000005e"  	eng="File Save dialog was cancelled."
+                                                                              chn="文件保存對話框被取消。" />
+  <CATString id="CAT_ERR_COMBO_MENU_NOT_FOUND" 		      value="0x8000005f"  	eng="Combo control is missing a menu."
+                                                                              chn="組合控制缺少一個菜單。" />
+  <CATString id="CAT_ERR_COMBO_EDIT_NOT_FOUND" 		      value="0x80000060"  	eng="Combo control is missing an edit box."
+                                                                              chn="組合控制是缺少一個編輯框。" />
+  <CATString id="CAT_ERR_CONTROL_NO_IMAGE" 		          value="0x80000061"  	eng="No image found for control."
+                                                                              chn="無圖像顯示控制。" />
+  <CATString id="CAT_ERR_GUIFACTORY_UNKNOWN_TYPE" 		  value="0x80000062"  	eng="GUIFactory - control type not found!"
+                                                                              chn="GUIFactory - 控制型不存在！" />
+  <CATString id="CAT_ERR_LIST_ITEM_NOT_FOUND" 		      value="0x80000063"  	eng="Item not found in list."
+                                                                              chn="項目列表中沒有找到。" />
+  <CATString id="CAT_ERR_LIST_OUT_OF_RANGE" 		        value="0x80000064"  	eng="Item out of range in list."
+                                                                              chn="超出範圍的項目清單。" />
+  <CATString id="CAT_ERR_SKIN_WINDOW_NOT_FOUND" 		    value="0x80000065"  	eng="Window skin not found."
+                                                                              chn="窗口皮膚沒有找到。" />
+  <CATString id="CAT_ERR_SKIN_WINDOW_NOT_OPEN" 		      value="0x80000066"  	eng="Window not open."
+                                                                              chn="窗口無法打開。" />
+  <CATString id="CAT_ERR_INVALID_TAB" 		              value="0x80000067"  	eng="Invalid tab index."
+                                                                              chn="無效的選項卡索引。" />
+  <CATString id="CAT_ERR_CONTROL_NOT_FOUND" 		        value="0x80000068"  	eng="Control not found."
+                                                                              chn="控制沒有找到。" />
+  <CATString id="CAT_ERR_CMD_NOT_FOUND" 		            value="0x80000069"  	eng="Command not found."
+                                                                              chn="命令未找到。" />
+  <CATString id="CAT_ERR_TREE_ITEM_NOT_FOUND" 		      value="0x8000006a"  	eng="Tree item not found."
+                                                                              chn="樹項目找不到。" />
+  <CATString id="CAT_ERR_TREE_INSERT_ERROR" 		        value="0x8000006b"  	eng="Error inserting item into tree."
+                                                                              chn="錯誤插入項目到樹。" />
+  <CATString id="CAT_ERR_TREE_REMOVE_ERROR" 		        value="0x8000006c"  	eng="Error removing item from tree."
+                                                                              chn="錯誤刪除項目從樹。" />
+  <CATString id="CAT_ERR_TREE_SET_ITEM_ERROR" 		      value="0x8000006d"  	eng="Error setting tree item."
+                                                                              chn="錯誤設置樹項目。" />
+  <CATString id="CAT_ERR_IMAGELIST_FAILED" 		          value="0x8000006e"  	eng="Imagelist failed."
+                                                                              chn="ImageList中失敗。" />
+  <CATString id="CAT_ERR_PREFS_NO_FILESYSTEM" 		      value="0x8000006f"  	eng="No filesystem for prefs."
+                                                                              chn="沒有文件系統的首選項。" />
+  <CATString id="CAT_ERR_STREAM_INVALID" 		            value="0x80000070"  	eng="Stream invalid."
+                                                                              chn="流無效。" />
+  <CATString id="CAT_ERR_NOT_INITIALIZED" 		          value="0x80000071"  	eng="Object is not initialized."
+                                                                              chn="對象未初始化。" />
+  <CATString id="CAT_ERR_INVALID_STRINGTABLE"           value="0x80000072"    eng="The stringtable is invalid or missing." 
+                                                                              chn="该字串是无效或丢失。"/>
+  <CATString id="CAT_ERR_SQL_ERROR"                     value="0x80001000"    eng="SQL error or missing database" />
+  <CATString id="CAT_ERR_SQL_INTERNAL"                  value="0x80001001"    eng="Internal logic error in SQLite" />
+  <CATString id="CAT_ERR_SQL_PERM"                      value="0x80001002"    eng="Access permission denied" />
+  <CATString id="CAT_ERR_SQL_ABORT"                     value="0x80001003"    eng="Callback routine requested an abort" />
+  <CATString id="CAT_ERR_SQL_BUSY"                      value="0x80001004"    eng="The database file is locked" />
+  <CATString id="CAT_ERR_SQL_LOCKED"                    value="0x80001005"    eng="A table in the database is locked" />
+  <CATString id="CAT_ERR_SQL_NOMEM"                     value="0x80001006"    eng="A malloc() failed" />
+  <CATString id="CAT_ERR_SQL_READONLY"                  value="0x80001007"    eng="Attempt to write a readonly database" />
+  <CATString id="CAT_ERR_SQL_INTERRUPT"                 value="0x80001008"    eng="Operation terminated by sqlite3_interrupt(" />
+  <CATString id="CAT_ERR_SQL_IOERR"                     value="0x80001009"    eng="Some kind of disk I/O error occurred" />
+  <CATString id="CAT_ERR_SQL_CORRUPT"                   value="0x8000100a"    eng="The database disk image is malformed" />
+  <CATString id="CAT_ERR_SQL_NOTFOUND"                  value="0x8000100b"    eng="NOT USED. Table or record not found" />
+  <CATString id="CAT_ERR_SQL_FULL"                      value="0x8000100c"    eng="Insertion failed because database is full" />
+  <CATString id="CAT_ERR_SQL_CANTOPEN"                  value="0x8000100d"    eng="Unable to open the database file" />
+  <CATString id="CAT_ERR_SQL_PROTOCOL"                  value="0x8000100e"    eng="NOT USED. Database lock protocol error" />
+  <CATString id="CAT_ERR_SQL_EMPTY"                     value="0x8000100f"    eng="Database is empty" />
+  <CATString id="CAT_ERR_SQL_SCHEMA"                    value="0x80001010"    eng="The database schema changed" />
+  <CATString id="CAT_ERR_SQL_TOOBIG"                    value="0x80001011"    eng="String or BLOB exceeds size limit" />
+  <CATString id="CAT_ERR_SQL_CONSTRAINT"                value="0x80001012"    eng="Abort due to constraint violation" />
+  <CATString id="CAT_ERR_SQL_MISMATCH"                  value="0x80001013"    eng="Data type mismatch" />
+  <CATString id="CAT_ERR_SQL_MISUSE"                    value="0x80001014"    eng="Library used incorrectly" />
+  <CATString id="CAT_ERR_SQL_NOLFS"                     value="0x80001015"    eng="Uses OS features not supported on host" />
+  <CATString id="CAT_ERR_SQL_AUTH"                      value="0x80001016"    eng="Authorization denied" />
+  <CATString id="CAT_ERR_SQL_FORMAT"                    value="0x80001017"    eng="Auxiliary database format error" />
+  <CATString id="CAT_ERR_SQL_RANGE"                     value="0x80001018"    eng="2nd parameter to sqlite3_bind out of range" />
+  <CATString id="CAT_ERR_SQL_NOTADB"                    value="0x80001019"    eng="File opened that is not a database file" />
+
+  <CATString id="CAT_ERR_QUERY_NOT_FOUND"               value="0x8000101a"    eng="Query not found in database tables." />
+  <CATString id="CAT_ERR_ALREADY_IN_TRANSACTION"        value="0x8000101b"    eng="Already in a transaction." />  
+  <CATString id="CAT_ERR_NOT_IN_TRANSACTION"            value="0x8000101c"    eng="Not in a transaction." />
+
+  <CATString id="CAT_ERR_CAPTURE_CREATE"                value="0x80002000"    eng="Error creating capture system."/>
+
+</CATStringTable>
+ 

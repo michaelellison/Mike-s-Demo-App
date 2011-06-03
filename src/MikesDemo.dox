@@ -1,0 +1,41 @@
+/// \mainpage
+///
+/// This application is a demo of a code library I've been building and using on and off
+/// for my personal projects over the last decade or so.
+///
+/// It's not production quality - I use it mainly to test out
+/// ideas and technologies, and to make quick prototypes and tools. 
+/// There are MANY things that I would (and have) done completely differently
+/// for a commercial product. However, it works as a code sample.  Also useful 
+/// to poke through if you want ideas.
+///
+/// Except for a handful of third-party libraries integrated into the framework,
+/// the code is my own.
+///
+/// Those libraries are:
+/// <UL>
+/// <LI> Expat</LI>
+/// <LI> libpng</LI>
+/// <LI> sqlite</LI>
+/// <LI> zlib</LI>
+/// </UL>
+///
+/// There are two main libraries in the app that I wrote.
+/// The core one: \ref CAT, and the GUI library \ref CATGUI.
+///
+/// The sample apps on the hobbies page are from a much older
+/// version of the same set of libraries - it's evolved over time.
+/// Of course, I'm still not a graphic artist ;)
+/// - Mike Ellison
+/// <hr>
+///
+/// \verbinclude "COPYING.txt"
+
+
+/// \defgroup MikesDemo Mikes's Demo App
+
+/// \defgroup CAT CAT Library
+/// \ingroup MikesDemo
+
+/// \defgroup CATGUI CATGUI Library
+/// \ingroup MikesDemo

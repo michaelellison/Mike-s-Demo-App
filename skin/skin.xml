@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Skin 
+  Author="Michael Ellison" 
+  AuthorUrl="http://www.linkedin.com/in/devellison" 
+  Copyright="Copyright (c) 2011 by Mike Ellison." 
+  Name="Mike's Demo">
+    
+    <MikesDemoWindow_Main 
+      Name="MikesDemo"
+      ColorFore="0x000000" 
+      ColorBack="0xffffff" 
+      Image="bgImage.png"
+      XPos="CenterObject" 
+      YPos="CenterObject" 
+      RememberPos="True" 
+      Width="800" Height="768" 
+      Sizeable="False" 
+      DragAnywhere="True" 
+      AutoDock="True" 
+      Primary="True" 
+      Title="Mike's Demo" 
+      HintText="Software and Projects of Mike Ellison">
+
+      <Button
+        Name="Title"
+        Command="Execute"
+        Parameter="mailto:devellison@gmail.com?subject=About%20your%20Demo%2e%2e%2e"
+        XPos="25"
+        YPos="25"
+        Image="title.png"
+        ImageFocus="title_a.png"
+        ImageActive="title_a.png"
+        HintText="Email me"
+        Cursor="Hand"
+        />
+
+      <Button
+        Name="LinkedIn"
+        Command="Execute"
+        Parameter="http://www.linkedin.com/in/devellison"
+        Image="linkedinbtn.png"
+        ImagePressed="linkedinbtn_p.png"
+        ImageFocus="linkedinbtn_f.png"
+        ImageDisabled="linkedinbtn_d.png"
+        ImageActive="linkedinbtn_a.png"
+        ImageFocusAct="linkedinbtn_fa.png"
+        YPos="12"
+        XPos="588"
+        HintText="See my LinkedIn profile"
+        Cursor="Hand"/>
+
+
+      <Button
+        Name="About"
+        Command="Help"
+        XPos="588"
+        YPos="90"
+        Image="about.png"
+        ImageFocus="about_f.png"
+        ImageActive="about_a.png"
+        HintText="Doxygen code documentation and licenses"
+        Cursor="Hand"
+            />
+
+
+      <RadioButton
+        Name="TabsWork"
+        Command="TabSelect"
+        XPos="23"
+        YPos="118"
+        Image="radiobtn1.png"
+        ImageOn="radiobtn1_on.png"
+        ImageActive="radiobtn1_focus.png"
+        ImageActiveOn="radiobtn1_on_focus.png"
+        ImageFocus="radiobtn1_focus.png"
+        ImageFocusOn="radiobtn1_on_focus.png"
+        RadioValue="0"
+        Cursor="Hand"
+        HintText="Professional Works"
+        ShowHintValue="False"
+        />
+
+      <RadioButton
+        Name="TabsHobby"
+        Command="TabSelect"
+        XPos="135"
+        YPos="118"
+        ColorBack="0x000080"
+        ColorFore="0xffefef"
+        Image="radiobtn2.png"
+        ImageOn="radiobtn2_on.png"
+        ImageActive="radiobtn2_focus.png"
+        ImageActiveOn="radiobtn2_on_focus.png"
+        ImageFocus="radiobtn2_focus.png"
+        ImageFocusOn="radiobtn2_on_focus.png"
+        HintText="Hobbies and Projects"
+        RadioValue="1"
+        ShowHintValue="False"
+        Cursor="Hand"
+        />
+
+      <RadioButton
+        Name="Tabs3d"
+        Command="TabSelect"
+        XPos="242"
+        YPos="118"
+        Image="radiobtn3.png"
+        ImageOn="radiobtn3_on.png"
+        ImageActive="radiobtn3_focus.png"
+        ImageActiveOn="radiobtn3_on_focus.png"
+        ImageFocus="radiobtn3_focus.png"
+        ImageFocusOn="radiobtn3_on_focus.png"
+        RadioValue="2"
+        HintText="Video and 3D sample"
+        ShowHintValue="False"
+        Cursor="Hand"
+        />
+
+      <Tab 
+           Name="Tabs" 
+           StartTab="0"
+           XPos="25"
+           YPos="161"
+           Width="745"
+           Height="550"
+           Visible="True">
+
+        <Layer Name="WorkTab" Width="745" Height="550" >
+
+          <Tree
+              Name="ProTree"
+              Command="ProSelect"
+              HintText="Professional Experience"
+              XPos="5"
+              YPos="5"
+              Width="320"
+              Height="133"
+              ColorFore="0xFFFFFF"
+              ColorBack="0x000000"
+              Item_1="Line 6"
+              Item_2="ReflectSystems"
+              Item_3="Intelligent Reasoning Systems"
+              Item_4="Progressive Systems Technologies"
+              FontName="Times New Roman" 
+              FontSize="12" 
+              Cursor="Hand" />
+
+          <PictureMulti
+            Name="ProLogos"
+            Command="DoLogoLink"
+            HintText="Additional Info.."
+            Cursor="Hand"
+            XPos="545"
+            YPos="5"
+            Width="200"
+            Height="133"
+            NumImage="5"
+            Image_1="line6_logo.png"
+            Image_2="reflect_logo.png"
+            Image_3="irsi_logo.png"
+            Image_4="pst_logo.png"
+            />
+
+          <PictureMulti
+            Name="ProPics"
+            Command="DoLogoLink"
+            HintText="Additional Info.."
+            Cursor="Hand"
+            XPos="335"
+            YPos="5"
+            Width="200"
+            Height="133"
+            NumImage="5"            
+            Image_1="pf2_screen.png"
+            Image_2="blank.png"
+            Image_3="irsi_machine.png"
+            Image_4="pst_sorter.png"
+          />
+
+          <Picture
+            XPos="0"
+            YPos="0"
+            Image="proframe.png" />
+
+
+          <Label
+            Name="ProText"
+            XPos="10"
+            YPos="150"
+            Width="720"
+            Height="400"
+            ColorFore="0xFFFFFF"
+            ColorBack="0x000000"
+            Multiline="True"            
+            FontName="Times New Roman" 
+            FontSize="12" 
+            />
+          
+        </Layer>
+        <Layer Name="HobbiesTab" Width="745" Height="550" >
+          <Button
+            Name="3dScanner"
+            Command="Go3d"
+            XPos="30"
+            YPos="20"
+            Image="3dscanner.png"
+            HintText="Screen shot from a laser-line rotary 3D scanner I designed and built (2001-2)"
+            Cursor="Hand"/>
+          
+          <Button
+            Name="MIDIDriver"
+            Command="Install"
+            Parameter="MIDIDriver_Setup.exe"
+            XPos="270"
+            YPos="20"
+            Image="mididriver.png"
+            HintText="Joystick/game pedal to MIDI conversion (2003). Click to install."
+            Cursor="Hand"/>
+          
+          <Button
+            Name="CodeBlind"
+            Command="Install"
+            Parameter="CodeBlind_Setup.exe"
+            XPos="510"
+            YPos="20"
+            Image="codeblind.png"
+            HintText="Color blindness simulator/tool (2003). Click to install."
+            Cursor="Hand"/>
+
+          <Button
+             Name="CNCFull"
+             Command="Execute"
+             Parameter="http://www.youtube.com/watch?v=iWFw1PShR0U"
+             XPos="30"
+             YPos="210"
+             Image="cnc_full.png"
+             HintText="CNC machine I built from a Fireball kit (2010). Click for YouTube." 
+             Cursor="Hand"/>
+
+          <Button
+             Name="CNCBed"
+             XPos="270"
+             YPos="210"
+             Image="cnc_bed.png"
+             HintText="Close-up of CNC machine." />
+
+          <Button
+             Name="Necklace"
+             Command="Execute"
+             Parameter="http://www.youtube.com/watch?v=FUHDom9ZRU8"
+             XPos="510"
+             YPos="210"
+             Image="jewelry.png"
+             HintText="Necklace I made with silver clay and CNC (2010). Click for YouTube." 
+             Cursor="Hand"/>
+
+          <Button
+             Name="Circuit"
+             XPos="30"
+             YPos="400"
+             Image="circuit.png"
+             HintText="HID device I'm working on - freshly routed on CNC (2011)" />
+
+          <Button
+             Name="Populated"
+             XPos="270"
+             YPos="400"
+             Image="populated.png"
+             HintText="Populated HID device. Still working on the firmware ;)" />
+
+          <Button
+             Name="Scope"
+             XPos="510"
+             YPos="400"
+             Image="scope.png"
+             HintText="Oscilliscope/Signal generator from kits (2010). Made case on CNC." />
+
+        </Layer>
+
+        <Layer Name="3DTab" Width="745" Height="550" >
+          <Video3D
+              Name="Video3D"
+              XPos="0"
+              YPos="0"
+              Width="745"
+              Height="550"
+              HintText="3D scan from my DIY 3d rotary laser scanner (on top of captured video if you've got it)"
+              Cursor="Hand" />
+        </Layer>
+      </Tab>
+      
+      <Label Name="StatusLabel" 
+           XPos="25" 
+           YPos="712" 
+           Height="30" 
+           Width="745" 
+           ColorBack="0x000080" 
+           ColorFore="0xffefef" 
+           FontName="Times New Roman" 
+           FontSize="12" 
+           TextCentered="True"/>
+  </MikesDemoWindow_Main>
+</Skin>

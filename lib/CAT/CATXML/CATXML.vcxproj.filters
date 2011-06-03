@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="CAT">
+      <UniqueIdentifier>{94d1cdc5-6360-4f07-9042-5cff7e12d336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Expat">
+      <UniqueIdentifier>{611626ae-83c0-4a34-b83b-ec0fe7528a9c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\CATCmdLine.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATCurveFit.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATDatabase.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATDebug.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATFilter.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATFilterAttackDecay.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATFilterEWMA.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATLineFit.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATMatrix.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStats.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStream.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStreamFile.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStreamRAM.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStreamSub.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATString.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStringTable.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATStringTableCore.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATXMLFactory.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATXMLObject.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CATXMLParser.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\CBMagInfo.cpp">
+      <Filter>CAT</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\expat\lib\xmlparse.c">
+      <Filter>Expat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\expat\lib\xmlrole.c">
+      <Filter>Expat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\expat\lib\xmltok.c">
+      <Filter>Expat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\expat\lib\xmltok_impl.c">
+      <Filter>Expat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\expat\lib\xmltok_ns.c">
+      <Filter>Expat</Filter>
+    </ClCompile>
+    <ClCompile Include="CATXML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\CATCmdLine.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATColor.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATConfig.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATCurveFit.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATDatabase.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATDebug.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATFilter.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATFilterAttackDecay.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATFilterEWMA.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATInternal.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATKeystroke.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATLineFit.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATMathUtil.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATMatrix.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATPoint.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATQueue.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATRect.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATResult.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATResultCore.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStack.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStats.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStream.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStreamFile.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStreamRAM.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStreamSub.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATString.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStringTable.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATStringTableCore.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATTypes.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATUtil.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATXMLFactory.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATXMLObject.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CATXMLParser.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CBMagInfo.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+    <ClInclude Include="..\CAT.h">
+      <Filter>CAT</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\CATStringCore.xml">
+      <Filter>CAT</Filter>
+    </None>
+  </ItemGroup>
+</Project>

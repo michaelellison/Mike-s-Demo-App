@@ -1,0 +1,11 @@
+/// \defgroup CAT Common Accessibility Technology [CAT] library
+/// \ingroup GAS
+///
+/// \section catlib Common Accessibility Technology [CAT] library
+///
+/// The Common Accessibility Technology library [CAT] contains
+/// the common code used in all of the \ref gas utilities.
+///
+/// CAT is released under an MIT-style \ref gaslicense "License".
+///
+/// \sa CATGUI
