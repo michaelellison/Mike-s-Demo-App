@@ -52,7 +52,7 @@ CATResult CATListBox::OSEvent( const CATEvent& event, CATInt32& retVal)
                 {
                 case LBN_SELCHANGE:
                     {
-                        int item = ::SendMessage(fControlWnd,LB_GETCURSEL,0,0);
+                        int item = (int)::SendMessage(fControlWnd,LB_GETCURSEL,0,0);
                         if (item >= 0)
                         {
                             CATLISTINFO* listInfo = 0;
@@ -105,7 +105,7 @@ void CATListBox::OSClearList()
 
 CATResult CATListBox::OSAddItem( CATInt32 index, const CATString& displayText, const CATLISTINFO* listInfo)
 {
-    CATInt32 item = SendMessage(fControlWnd,LB_ADDSTRING,0,(LONG)(const char*)displayText);
+    CATInt32 item = (CATInt32)SendMessage(fControlWnd,LB_ADDSTRING,0,(LONG)(const char*)displayText);
     if (item < 0)
     {
         return false;
@@ -124,7 +124,7 @@ CATResult CATListBox::OSRemoveItem( CATInt32 index )
 
 CATInt32 CATListBox::OSGetCurSel()
 {
-    CATInt32 item = SendMessage(fControlWnd,LB_GETCURSEL,0,0);
+    CATInt32 item = (CATInt32)SendMessage(fControlWnd,LB_GETCURSEL,0,0);
     return item;
 }
 

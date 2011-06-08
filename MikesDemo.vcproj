@@ -12,6 +12,9 @@
 		<Platform
 			Name="Win32"
 		/>
+		<Platform
+			Name="x64"
+		/>
 	</Platforms>
 	<ToolFiles>
 	</ToolFiles>
@@ -19,7 +22,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)\bin"
-			IntermediateDirectory="$(SolutionDir)\obj\$(ProjectName)\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)obj\$(ProjectName)\$(ConfigurationName)_$(PlatformName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			>
@@ -94,7 +97,7 @@
 		<Configuration
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)\bin"
-			IntermediateDirectory="$(SolutionDir)\obj\$(ProjectName)\$(ConfigurationName)"
+			IntermediateDirectory="$(SolutionDir)obj\$(ProjectName)\$(ConfigurationName)_$(PlatformName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -145,6 +148,163 @@
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="rmdir $(SolutionDir)\bin\skin /s /Q&#x0D;&#x0A;mkdir $(SolutionDir)\bin\skin&#x0D;&#x0A;xcopy $(SolutionDir)\skin\*.* $(SolutionDir)\bin\skin\*.* /s /Y&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Debug|x64"
+			OutputDirectory="$(SolutionDir)\bin"
+			IntermediateDirectory="$(SolutionDir)obj\$(ProjectName)\$(ConfigurationName)_$(PlatformName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="$(SolutionDir)\lib\CAT;$(SolutionDir)\lib\CATGUI;$(SolutionDir)\lib\expat\lib;$(SolutionDir)\lib\libpng;$(SolutionDir)\lib\zlib;$(SolutionDir)\lib\sqlite"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;COMPILED_FROM_DSP;XML_STATIC;_CRT_SECURE_NO_WARNINGS;SQLITE_THREADSAFE=0;XML_UNICODE_WCHAR_T;XML_LARGE_SIZE;XML_USE_MSC_EXTENSIONS"
+				MinimalRebuild="true"
+				BasicRuntimeChecks="0"
+				RuntimeLibrary="1"
+				BufferSecurityCheck="false"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="version.lib shlwapi.lib opengl32.lib glu32.lib comctl32.lib Oleacc.lib strmiids.lib d3d9.lib D3dx9.lib"
+				OutputFile="$(OutDir)\$(ProjectName)_64.exe"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="17"
+			/>
+			<Tool
+				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
+			/>
+			<Tool
+				Name="VCXDCMakeTool"
+			/>
+			<Tool
+				Name="VCBscMakeTool"
+			/>
+			<Tool
+				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="rmdir $(SolutionDir)\bin\skin /s /Q&#x0D;&#x0A;mkdir $(SolutionDir)\bin\skin&#x0D;&#x0A;xcopy $(SolutionDir)\skin\*.* $(SolutionDir)\bin\skin\*.* /s /Y&#x0D;&#x0A;"
+			/>
+		</Configuration>
+		<Configuration
+			Name="Release|x64"
+			OutputDirectory="$(SolutionDir)\bin"
+			IntermediateDirectory="$(SolutionDir)obj\$(ProjectName)\$(ConfigurationName)_$(PlatformName)"
+			ConfigurationType="1"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
+			>
+			<Tool
+				Name="VCPreBuildEventTool"
+			/>
+			<Tool
+				Name="VCCustomBuildTool"
+			/>
+			<Tool
+				Name="VCXMLDataGeneratorTool"
+			/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"
+			/>
+			<Tool
+				Name="VCMIDLTool"
+				TargetEnvironment="3"
+			/>
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(SolutionDir)\lib\CAT;$(SolutionDir)\lib\CATGUI;$(SolutionDir)\lib\expat\lib;$(SolutionDir)\lib\libpng;$(SolutionDir)\lib\zlib;$(SolutionDir)\lib\sqlite"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;COMPILED_FROM_DSP;XML_STATIC;_CRT_SECURE_NO_WARNINGS;SQLITE_THREADSAFE=0;XML_UNICODE_WCHAR_T;XML_LARGE_SIZE;XML_USE_MSC_EXTENSIONS;"
+				RuntimeLibrary="0"
+				BufferSecurityCheck="false"
+				EnableFunctionLevelLinking="true"
+				UsePrecompiledHeader="0"
+				WarningLevel="3"
+				DebugInformationFormat="3"
+			/>
+			<Tool
+				Name="VCManagedResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCResourceCompilerTool"
+			/>
+			<Tool
+				Name="VCPreLinkEventTool"
+			/>
+			<Tool
+				Name="VCLinkerTool"
+				AdditionalDependencies="version.lib shlwapi.lib opengl32.lib glu32.lib comctl32.lib Oleacc.lib strmiids.lib d3d9.lib"
+				OutputFile="$(OutDir)\$(ProjectName)_64.exe"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="17"
 			/>
 			<Tool
 				Name="VCALinkTool"

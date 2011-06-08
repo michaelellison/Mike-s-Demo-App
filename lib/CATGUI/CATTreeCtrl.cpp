@@ -55,7 +55,7 @@ CATTREEINFO* CATTreeCtrl::GetCurItem()
 
 CATUInt32  CATTreeCtrl::GetNumRootItems()
 {
-    return this->fRootList.size();
+    return (CATUInt32)this->fRootList.size();
 }
 
 CATTREEINFO* CATTreeCtrl::GetRootItem(CATUInt32 index)
@@ -140,7 +140,7 @@ CATResult CATTreeCtrl::Insert( const CATString&  displayText,
     {
         if (index == -1)
         {
-            index = fRootList.size();
+            index = (CATUInt32)fRootList.size();
         }
         this->fRootList.insert(fRootList.begin()+index,newInfo);
     }
@@ -148,7 +148,7 @@ CATResult CATTreeCtrl::Insert( const CATString&  displayText,
     {
         if (index == -1)
         {
-            index = parent->Children.size();
+            index = (CATUInt32)parent->Children.size();
         }
         parent->Children.insert(parent->Children.begin() + index, newInfo);
     }
@@ -201,7 +201,7 @@ CATResult CATTreeCtrl::Remove( CATTREEINFO*&     item)
     }
 
     CATTREEINFO* parent = item->Parent;
-    numChildren = parent->Children.size();
+    numChildren = (CATUInt32)parent->Children.size();
 
     std::vector<CATTREEINFO*>::iterator iter = parent->Children.begin();
     while (iter != parent->Children.end())

@@ -27,13 +27,16 @@ LRESULT WINAPI CATControlWnd::CustomControlProc( HWND hWnd,
     CATControlWnd* theControl = (CATControlWnd*)::GetWindowLongPtr(hWnd, GWLP_USERDATA);
 
     bool     handled = false;
-    CATInt32   result = 0;
+    LRESULT   result = 0;
 
     // Allow children to override any default handling
     // by overriding the OnControlEvent message.
     if (theControl)
     {
-        handled = theControl->OnControlEvent(CATEvent(CATEVENT_WINDOWS_EVENT,(CATInt32)hWnd,message,wParam,lParam), result);      
+		  CATInt32 tmpRes = 0;
+        handled = theControl->OnControlEvent(CATEvent(CATEVENT_WINDOWS_EVENT,(CATInt32)hWnd,message,wParam,lParam), tmpRes);      
+		  if (handled)
+			  result = tmpRes;
     }
 
     if (!handled)
@@ -152,15 +155,15 @@ CATResult CATControlWnd::CreateControlWnd(
                         absRect.left, absRect.top, absRect.Width(), absRect.Height(),
                         this->GetWindow()->OSGetWnd(),
                         (HMENU)0,
-                        (HINSTANCE)::GetWindowLong(this->GetWindow()->OSGetWnd(), GWL_HINSTANCE),
+                        (HINSTANCE)::GetWindowLongPtr(this->GetWindow()->OSGetWnd(), GWLP_HINSTANCE),
                         0);
 
     if (fControlWnd)
     {
         fOldWndProc = (void*)::GetWindowLongPtr(fControlWnd, GWLP_WNDPROC);
         
-        ::SetWindowLongPtr(fControlWnd, GWLP_WNDPROC, (CATInt32)CustomControlProc);
-        ::SetWindowLongPtr(fControlWnd, GWLP_USERDATA, (CATInt32)this);
+        ::SetWindowLongPtr(fControlWnd, GWLP_WNDPROC, (LONG_PTR)CustomControlProc);
+        ::SetWindowLongPtr(fControlWnd, GWLP_USERDATA, (LONG_PTR)this);
         ::SetWindowPos(fControlWnd,0,0,0,0,0,SWP_FRAMECHANGED|SWP_NOMOVE|SWP_NOZORDER|SWP_NOSIZE);      
         
         this->GetWindow()->RegCtlWnd(this,fControlWnd);

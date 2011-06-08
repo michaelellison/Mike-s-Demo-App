@@ -80,7 +80,7 @@ void CATTreeCtrl::OSRebuildTree(std::vector<CATTREEINFO*>* curList)
 
     fRespondSelect = false;
 
-    CATUInt32 numItems = curList->size();
+    CATUInt32 numItems = (CATUInt32)curList->size();
     for (CATUInt32 i = 0; i < numItems; i++)
     {
         CATTREEINFO* curInfo = (*curList)[i];

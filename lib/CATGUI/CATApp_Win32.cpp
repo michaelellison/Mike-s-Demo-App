@@ -127,7 +127,7 @@ CATResult CATApp::SaveFileDialog( const CATString&           title,
     // Build up filter list.
     CATString filterString;
     CATUInt32 i;
-    CATUInt32 numEntries = filetypeList.size();
+    CATUInt32 numEntries = (CATUInt32)filetypeList.size();
     for (i = 0; i < numEntries; i++)
     {
         CATString curString = filetypeList[i];

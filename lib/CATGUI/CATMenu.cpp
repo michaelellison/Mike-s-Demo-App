@@ -230,7 +230,7 @@ CATResult CATMenu::SetCurItem(CATMENUITEM* item)
 
 CATUInt32 CATMenu::GetNumTopNodes()
 {
-    return this->fRootList.size();
+    return (CATUInt32)this->fRootList.size();
 }
 
 CATMENUITEM* CATMenu::GetTopNode( CATUInt32 index )

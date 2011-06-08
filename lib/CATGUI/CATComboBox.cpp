@@ -170,7 +170,7 @@ void CATComboBox::RebuildCombo()
 
     fComboMenu->Clear();
 
-    CATUInt32 numEntries = fMenuList.size();
+    CATUInt32 numEntries = (CATUInt32)fMenuList.size();
     for (CATUInt32 i = 0; i < numEntries; i++)
     {
         CATString curString = fMenuList[i];      

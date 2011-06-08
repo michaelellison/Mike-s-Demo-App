@@ -53,7 +53,7 @@ void CATListBox::OnEscapeChange()
 
 CATInt32 CATListBox::GetCount() const
 {
-    return this->fList.size();
+    return (CATInt32)this->fList.size();
 }
 
 CATInt32 CATListBox::GetCurIndex() const
@@ -75,7 +75,7 @@ CATResult CATListBox::Insert( const CATString&  displayText,
     listInfo->BaseListBox = this;
 
     if (index == -1)
-        index = this->fList.size();
+        index = (CATInt32)this->fList.size();
 
     std::vector<CATLISTINFO*>::iterator iter = fList.begin();
     iter += index;

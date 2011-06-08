@@ -47,21 +47,21 @@ LRESULT CALLBACK CATWindow::WindowProc( HWND hwnd,      // handle to window
     {
         // Store this* for our object in the window
         LPCREATESTRUCT lpc = (LPCREATESTRUCT)lParam;
-        SetWindowLong(hwnd,GWL_USERDATA,(LONG)(UINT_PTR)lpc->lpCreateParams);      
+        SetWindowLongPtr(hwnd,GWLP_USERDATA,(UINT_PTR)lpc->lpCreateParams);      
 
         // Store halftone palette in the window as well.
         HDC hdc = GetDC(hwnd);
         HPALETTE palette = CreateHalftonePalette(hdc);
         ReleaseDC(hwnd,hdc);      
-        SetWindowLong( hwnd,0, (CATInt32)(UINT_PTR)palette);
+        SetWindowLongPtr( hwnd,0, (UINT_PTR)palette);
 
         // Flush changes to window data
         SetWindowPos(hwnd,0,0,0,0,0,SWP_FRAMECHANGED|SWP_NOMOVE|SWP_NOZORDER|SWP_NOSIZE);      
     }
 
     // Retrieve information stored in the window
-    CATWindow* theWnd     = (CATWindow*)(UINT_PTR)GetWindowLong(hwnd,GWL_USERDATA);
-    HPALETTE  appPalette = (HPALETTE)(UINT_PTR)GetWindowLong(hwnd,0);
+    CATWindow* theWnd     = (CATWindow*)(UINT_PTR)GetWindowLongPtr(hwnd,GWLP_USERDATA);
+    HPALETTE  appPalette = (HPALETTE)(UINT_PTR)GetWindowLongPtr(hwnd,0);
 
 
     if (theWnd == 0)
@@ -238,7 +238,7 @@ LRESULT CALLBACK CATWindow::WindowProc( HWND hwnd,      // handle to window
             case WM_CHAR:
                 {
                     CATMODKEY modKey = GetModifierKeys();               
-                    theWnd->OnKeyPress(CATKeystroke(wParam,CATKEY_NONE,modKey));
+                    theWnd->OnKeyPress(CATKeystroke((CATUInt32)wParam,CATKEY_NONE,modKey));
                     handled = true;
                 }
                 break;
@@ -476,7 +476,7 @@ CATResult CATWindow::OSTakeoverWnd(CATWindow* parentWnd)
     this->fWindow = parentWnd->fWindow;
     fPrevWndOwner = parentWnd;
     
-    SetWindowLong(fWindow,GWL_USERDATA,(LONG)(UINT_PTR)this);
+	 SetWindowLongPtr(fWindow,GWLP_USERDATA,(LONG_PTR)this);
 
     parentWnd->fWindow = 0;
     parentWnd->fVisible = false;
@@ -519,7 +519,7 @@ CATResult CATWindow::OSRestoreTakenWnd()
 
     PauseScanning();
 
-    SetWindowLong(fWindow,GWL_USERDATA,(LONG)(UINT_PTR)fPrevWndOwner);    
+    SetWindowLongPtr(fWindow,GWLP_USERDATA,(UINT_PTR)fPrevWndOwner);    
 
     CATRect realRect = fPrevWndOwner->OSGetRealRect();
     RECT rect;
@@ -1459,7 +1459,7 @@ LRESULT CATWindow::OSOnKeyDown(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPara
         case VK_F12:      OnKeyDown(CATKeystroke(0,CATKEY_F12,modKey));     break;
         
         // Keys we track up/down for
-        default:          OnKeyDown(CATKeystroke(wParam,CATKEY_NONE,modKey)); lRes=1;handled=true;break;
+        default:          OnKeyDown(CATKeystroke((CATUInt32)wParam,CATKEY_NONE,modKey)); lRes=1;handled=true;break;
     }            
     return lRes;
 }
@@ -1753,7 +1753,6 @@ LRESULT CATWindow::OSOnDrawItem(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 LRESULT CATWindow::OSGetObject(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam, bool& handled)
 {
     LRESULT lRes = 0;
-    DWORD dwObjId = lParam;  
 	 // Add in accessibility hooks here TODO
     return lRes;
 }

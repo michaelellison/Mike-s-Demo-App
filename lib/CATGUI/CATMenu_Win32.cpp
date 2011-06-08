@@ -123,7 +123,7 @@ void CATMenu::DoMenu()
 
 void CATMenu::CreateSubMenu( std::vector<CATMENUITEM*>& itemList, HMENU parentMenu)
 {
-    CATUInt32 numItems = itemList.size();
+    CATUInt32 numItems = (CATUInt32)itemList.size();
     CATUInt32 i;
 
     for (i = 0; i < numItems; i++)
