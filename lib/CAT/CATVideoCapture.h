@@ -39,12 +39,13 @@ class CATVideoCapture
 		/// Stop capturing and clean up.
 		virtual CATResult Stop();
 
+		virtual CATResult LockImage(CATUInt32 msWait = 0xFFFFFFFF);
+		virtual void      ReleaseImage();
 	protected:				
 		CATResult		InitCapture();
 		void				Cleanup();			///< Clean up any referenced interfaces.
 		CATResult		CreateGraph();		///< Set up rendering
 		
-
 		struct			INTERNAL;
 		INTERNAL*		fInternal;			///< Internal defs - don't export dshow to clients
 		CATWND			fWnd;

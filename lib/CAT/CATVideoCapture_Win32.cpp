@@ -75,6 +75,7 @@ CATResult CATVideoCapture::Start()
 		return CAT_ERR_NOT_INITIALIZED;
 	
 	CATResult result = CAT_ERR_CAPTURE_CREATE;
+
 /* Source file test
 	{
 		CATString sourceFile = 
@@ -290,3 +291,16 @@ CATResult CATVideoCapture::InitCapture()
 	return CAT_SUCCESS;
 }
 
+CATResult CATVideoCapture::LockImage(CATUInt32 wait)
+{
+	if (!fInternal->fAllocPres)
+		return CAT_ERROR;
+
+	return fInternal->fAllocPres->LockImage(wait);
+}
+
+void CATVideoCapture::ReleaseImage()
+{
+	if (fInternal->fAllocPres)
+		fInternal->fAllocPres->ReleaseImage();
+}

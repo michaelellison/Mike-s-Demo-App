@@ -1430,11 +1430,15 @@
 					>
 					<Tool
 						Name="VCCustomBuildTool"
-						CommandLine="copy $(TargetFile) $(OutputDir)\skin\Strings.xml"
+						CommandLine="copy $(TargetFile) $(OutputDir)\skin\Strings.xml&#x0D;&#x0A;"
 					/>
 				</FileConfiguration>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

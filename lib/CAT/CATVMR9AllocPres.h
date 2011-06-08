@@ -36,6 +36,8 @@ class CATVMR9AllocPres : public  IVMRSurfaceAllocator9, IVMRImagePresenter9
 		virtual CATResult Init(HWND wnd, CATInt32 w, CATInt32 h,CATCaptureCB cb, void* context);
 		virtual CATResult Uninit();
 
+		CATResult LockImage(CATUInt32 msWait = 0xFFFFFFFF);
+		void ReleaseImage();
 		IDirect3DDevice9* GetDevice();
 		HMONITOR				GetMonitor();
 
@@ -60,6 +62,8 @@ class CATVMR9AllocPres : public  IVMRSurfaceAllocator9, IVMRImagePresenter9
 	
 	protected:
 		CATImage*							fImage;
+		CATMutex								fImageLock;
+
 		IDirect3D9*							fD3d;
 		IDirect3DDevice9*					fD3dDev;
 		HMONITOR								fMonitor;
@@ -69,11 +73,10 @@ class CATVMR9AllocPres : public  IVMRSurfaceAllocator9, IVMRImagePresenter9
 		DWORD									fSurfaceCount;
 
 		CATCritSec							fCritSec;
-		CATMutex								fMutex;
 		volatile LONG						fRefCount;		
 		void*									fContext;
 		CATCaptureCB						fCallback;
-		
+	
 };
 
 #endif // _CATVMR9AllocPres_H_

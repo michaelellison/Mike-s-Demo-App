@@ -358,14 +358,6 @@
 					RelativePath=".\CATTreeCtrl_Win32.cpp"
 					>
 				</File>
-				<File
-					RelativePath=".\CATVideoCtrl.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\CATVideoCtrl.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="Base"
@@ -534,6 +526,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

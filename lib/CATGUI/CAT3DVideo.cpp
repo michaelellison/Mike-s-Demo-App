@@ -16,20 +16,23 @@
 
 #define kMinRotate 0.0001f
 
+#define CAT_DIRTY_3D CATWM_APPLICATION-1
 
-
-CAT3DVideo::CAT3DVideo(   const CATString&             element, 
-								const CATString&             rootDir)
-							: CATControlWnd(element,  rootDir)
+CAT3DVideo::CAT3DVideo(  const CATString&        element, 
+                         const CATString&        rootDir)
+                       : CATControlWnd(element,  rootDir),
+	fRotXFilter(1,.5f),
+	fRotYFilter(1,.5f),
+	fRotZFilter(1,.5f)
 {   
-	// Defaults
-	// Register a window class for the 3D view
-	fCurImage = 0;
+	fCurImage = 0;    ///< Not owned by us - is from image capture
+	                  ///< class. Have to lock when using.
 	
-	fWindowAtom = 0;
-	fDisplayList = -1;
-	fAxisList	 = -1;
-	fRotateSpeed  = 0.0f;
+
+	fIsProcDirty      = 0;	
+	fWindowAtom       = 0;
+	fDisplayList      = -1;
+	fAxisList         = -1;
 	f3DXYTranslating	=	false;		// Are we moving the view?
 	f3DXYRotating		=	false;		// Rotating it?
 	f3DZTranslating	=	false;		// Translating on Z?
@@ -43,12 +46,13 @@ CAT3DVideo::CAT3DVideo(   const CATString&             element,
 	// Start out at origin for view
 	fViewX	 = fViewY	 = fViewZ	 = 0.0;
 	fViewRotX = fViewRotY = fViewRotZ = 0.0;
-	fCursor.SetType(CATCURSOR_HAND);
+	fCursor.SetType(CATCURSOR_HAND);	
 }
 
 // Destructor
 CAT3DVideo::~CAT3DVideo()
 {		
+	
 	// Kill the display list if we got one
 	if (fDisplayList != -1)
 	{
@@ -65,13 +69,12 @@ CAT3DVideo::~CAT3DVideo()
 // it won't be scaled with the other stuff.
 //
 void CAT3DVideo::PostDraw(	CATDRAWCONTEXT		hdc, 
-									const CATRect&		updateRect)
+								  const CATRect&		updateRect)
 {
 	HDC odc;
 	PAINTSTRUCT ps;
 
 	// Begin a paint operation
-	fMutex.Wait();
 	odc = BeginPaint(fHwnd, &ps);
 
 	// Make the OpenGL RC current for drawing
@@ -85,31 +88,43 @@ void CAT3DVideo::PostDraw(	CATDRAWCONTEXT		hdc,
 
 	// Draw background
 	::glPushMatrix();
-		 
-	::gluOrtho2D(0, fRect.Width(), fRect.Height(), 0);	 
-		 
-		if (fCurImage)
-		{
-			 ::glDrawPixels(fCurImage->Width(),fCurImage->Height(),GL_RGBA,GL_UNSIGNED_BYTE,fCurImage->GetRawDataPtr());
-			 ::glClear(GL_DEPTH_BUFFER_BIT);		 
-		}
-		else
-		{
-			::glClear(GL_COLOR_BUFFER_BIT);
-		}
 
-		::gluPerspective(45.0,
-			(CATFloat64)fRect.Width()/(CATFloat64)fRect.Height(),
-			fabs(fMaxZ-fMinZ)/10,			// 1 to 100 for viewing. Hey, sounds good to me ;)
-			fabs(fMaxZ-fMinZ)*10);		// might actually calc this or something later, but for objects
-			 
-		::glPopMatrix();
-		
-		// Translate first, then rotate Z/Y/X to our current camera view
-		::glTranslatef(fViewX, fViewY, fViewZ);
-		::glRotatef(fViewRotZ,0,0,1);	
-		::glRotatef(fViewRotY,0,1,0);
-		::glRotatef(fViewRotX,1,0,0);
+	::gluOrtho2D(0, fRect.Width(), fRect.Height(), 0);	 
+
+	this->fCapture.LockImage();
+
+	if (fCurImage)
+	{
+		if (fIsProcDirty)
+		{
+			fProcessor.ProcessSwapRGBA(fCurImage->GetRawDataPtr(),
+				fCurImage->Width(), 
+				fCurImage->Height(),
+				0,0,255);
+			fIsProcDirty = false;
+		}
+		::glDrawPixels(fCurImage->Width(),fCurImage->Height(),GL_RGBA,GL_UNSIGNED_BYTE,fCurImage->GetRawDataPtr());
+		::glClear(GL_DEPTH_BUFFER_BIT);		 
+	}
+	else
+	{
+		::glClear(GL_COLOR_BUFFER_BIT);
+	}
+	this->fCapture.ReleaseImage();
+
+	::gluPerspective(45.0,
+		(CATFloat64)fRect.Width()/(CATFloat64)fRect.Height(),
+		fabs(fMaxZ-fMinZ)/10,    // 1 to 100 for viewing. Hey, sounds good to me ;)
+		fabs(fMaxZ-fMinZ)*10);   // might actually calc this or something later, but for objects
+
+	::glPopMatrix();
+
+	// Translate first, then rotate Z/Y/X to our current camera view
+	::glTranslatef(fViewX, fViewY, fViewZ);
+	::glRotatef(fViewRotZ,0,0,1);	
+	::glRotatef(fViewRotY,0,1,0);
+	::glRotatef(fViewRotX,1,0,0);
+
 
 
 	// Draw anything in our display list
@@ -137,7 +152,6 @@ void CAT3DVideo::PostDraw(	CATDRAWCONTEXT		hdc,
 
 	// End Paint session
 	EndPaint(fHwnd,&ps);
-	fMutex.Release();
 }
 
 // This is more or less our OnSize() event, 'cept it's different
@@ -146,7 +160,7 @@ void CAT3DVideo::PostDraw(	CATDRAWCONTEXT		hdc,
 CATResult CAT3DVideo::RectFromAttribs()
 {	
 	CATResult res = CATControlWnd::RectFromAttribs();
-	
+
 	CATRect rect = this->GetRectAbs();
 	// Move the 3D window to our new location - don't redraw it yet
 	MoveWindow(	fHwnd,		
@@ -178,7 +192,7 @@ CATResult CAT3DVideo::RectFromAttribs()
 	// We perform the view translations/rotations during the draw.
 	::glMatrixMode(GL_MODELVIEW);
 	::glLoadIdentity();
-	 
+
 
 	// Release the RC and DC
 	::wglMakeCurrent(NULL,NULL);	
@@ -191,27 +205,27 @@ bool CAT3DVideo::OnControlEvent(const CATEvent& eventMsg, CATInt32& returnVal)
 {
 	switch (eventMsg.fEventCode)
 	{
-		case CATEVENT_WINDOWS_EVENT:
-			{
-				returnVal = (CATInt32)CAT3DVideoProc(
-							(HWND)eventMsg.fIntParam1,
-							(UINT)eventMsg.fIntParam2,
-							(WPARAM)eventMsg.fIntParam3,
-							(LPARAM)eventMsg.fIntParam4);
-			}
-			break;
+	case CATEVENT_WINDOWS_EVENT:
+		{
+			returnVal = (CATInt32)CAT3DVideoProc(
+				(HWND)eventMsg.fIntParam1,
+				(UINT)eventMsg.fIntParam2,
+				(WPARAM)eventMsg.fIntParam3,
+				(LPARAM)eventMsg.fIntParam4);
+		}
+		break;
 
-		default:
-			break;
+	default:
+		break;
 	}
 	return false;
 }
 // This is the raw Win32 window proc for the 3D view window.
 // Handle mousing and stuff here...
 LRESULT CALLBACK CAT3DVideo::CAT3DVideoProc(   HWND hwnd,
-														UINT uMsg,
-														WPARAM wParam,
-														LPARAM lParam)
+														  UINT uMsg,
+														  WPARAM wParam,
+														  LPARAM lParam)
 {
 	// Get our "this" pointer from the window. WARNING: will not be true on WM_CREATE
 	// (it is set on WM_CREATE though from the datastructure in lParam for window creation)
@@ -228,8 +242,14 @@ LRESULT CALLBACK CAT3DVideo::CAT3DVideoProc(   HWND hwnd,
 		wnd3d->f3DZTranslating		= false;
 		wnd3d->f3DZRotating			= false;
 		break;
+	case WM_TIMER:
+		if (wParam == CAT_DIRTY_3D)
+		{
+			wnd3d->MarkDirty();
+		}
+		break;
 		// This gets called anytime the mouse moves within our window
-		// check button-down motions
+		// check button-down motions	
 	case WM_MOUSEMOVE:
 		{
 			// Find the XY offsets from the last location of the mouse
@@ -270,6 +290,7 @@ LRESULT CALLBACK CAT3DVideo::CAT3DVideoProc(   HWND hwnd,
 		break;
 
 	case WM_DESTROY:
+		::KillTimer(wnd3d->fHwnd,CAT_DIRTY_3D );
 		// When the window is destroyed, we should destroy our
 		// OpenGL context as well.
 		::wglMakeCurrent(0,0);
@@ -280,11 +301,6 @@ LRESULT CALLBACK CAT3DVideo::CAT3DVideoProc(   HWND hwnd,
 	}
 
 	return DefWindowProc(hwnd,uMsg,wParam,lParam);
-}
-
-void CAT3DVideo::SetRotateSpeed(CATFloat32 speed)
-{
-	fRotateSpeed = speed;
 }
 
 
@@ -653,6 +669,7 @@ void CAT3DVideo::Set3dFacets(	CATC3DPoint* pointArray, CATInt32 numScans, CATInt
 
 void CAT3DVideo::OnParentCreate()
 {
+	
 	fWindowType = "CAT3DVideo";
 
 	// Register a window class for us..
@@ -712,15 +729,15 @@ void CAT3DVideo::OnParentCreate()
 		::glClearDepth(1.0f);
 
 		// Enable depth checking and smooth points at size 2
-		 glEnable(GL_DEPTH_TEST);
-		 glEnable(GL_POINT_SMOOTH);
- 		 glEnable(GL_COLOR_MATERIAL);
-		 glEnable(GL_DEPTH_TEST);
-		 glEnable(GL_BLEND);
-		 glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		 glEnable(GL_LIGHTING);
-		 glEnable(GL_LIGHT0);
-		 glShadeModel(GL_SMOOTH);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_POINT_SMOOTH);
+		glEnable(GL_COLOR_MATERIAL);
+		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		glShadeModel(GL_SMOOTH);
 
 		::glPointSize(2);
 
@@ -731,6 +748,7 @@ void CAT3DVideo::OnParentCreate()
 
 		// Initialize the capture
 		fCapture.Init(fHwnd,fRect, OnFrame,this);
+		::SetTimer(fHwnd,CAT_DIRTY_3D,1000/30,0);
 }
 
 
@@ -747,31 +765,23 @@ CATResult CAT3DVideo::Stop()
 void CAT3DVideo::OnFrame(CATImage* frame, void* context)
 {
 	CAT3DVideo* ctrl = (CAT3DVideo*)context;	
-	ctrl->fMutex.Wait();	
 	if (ctrl->IsVisible())
 	{
 		// Snag frame ptr
 		ctrl->fCurImage = frame;
-
-		// And rotate the joystick
-		CATFloat32 ratio = (360.0f) / (CATFloat32)(ctrl->fRect.right - ctrl->fRect.left);
-		ctrl->fViewRotY += ctrl->fRotateSpeed * ratio;
-		while (ctrl->fViewRotY > 360)	
-			ctrl->fViewRotY -= 360;
-
-		ctrl->MarkDirty();
+		ctrl->fIsProcDirty = true;
+		//ctrl->MarkDirty(); (right now using timer)
 	}
-	ctrl->fMutex.Release();
 }
 
 
-void CAT3DVideo::OnMouseWheel(    const CATPOINT& point,
-											 CATFloat32        wheelMove,
-											 CATMODKEY			modKey)
+void CAT3DVideo::OnMouseWheel( const CATPOINT&  point,
+                               CATFloat32       wheelMove,
+                               CATMODKEY        modKey)
 {
 
-    CATFloat32 keyStep = (modKey & CATMODKEY_SHIFT)?1:10.0f;
-    CATFloat32 delta = (wheelMove*keyStep);
-	 fViewZ -= ((fMaxZ - fMinZ)/100.0f)*delta;
-	 this->MarkDirty();      
+	CATFloat32 keyStep = (modKey & CATMODKEY_SHIFT)?1:10.0f;
+	CATFloat32 delta = (wheelMove*keyStep);
+	fViewZ -= ((fMaxZ - fMinZ)/100.0f)*delta;
+	this->MarkDirty();      
 }

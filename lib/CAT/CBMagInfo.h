@@ -243,6 +243,13 @@ class CBMagInfo
                                             int               procHeight,
 														  bool				  skipAlpha = false);
 
+        void            ProcessSwapRGBA(    unsigned char*    buf,
+                                            int               imgWidth,
+                                            int               imgHeight,
+                                            int               xOff,
+                                            int               yOff,
+														  unsigned char alpha = 255);
+
         //--------------------------------------------------------------
         // Accessors w/validation
 

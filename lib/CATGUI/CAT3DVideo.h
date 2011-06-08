@@ -11,6 +11,8 @@
 #include "CATCritSec.h"
 #include "CATVideoCapture.h"
 #include "CATMutex.h"
+#include "CBMagInfo.h"
+#include "CATFilterAttackDecay.h"
 #include <gl\gl.h>
 
 
@@ -39,8 +41,6 @@ public:
 	// Auto-facet for scanned information. triangles == true uses triangles, otherwise uses quads
 	virtual void Set3dFacets(	CATC3DPoint* pointArray, CATInt32 numScans, CATInt32 height, bool triangles = true);
 
-	virtual void SetRotateSpeed(CATFloat32 speed);
-
 	// Turn the axis display on or off. If on, and corner == true, then it displays in corner.
 	// Otherwise, it displays inside the object at the origin.
 	virtual void SetAxisDisplay(bool on, bool corner = false);
@@ -53,6 +53,7 @@ public:
 										   CATFloat32        wheelMove,
 											CATMODKEY			modKey);
 
+	CBMagInfo* GetImageProcessor() {return &fProcessor;}
 protected:
 	void CenterViewport();
 	void On3DMouseMove(CATFloat32 xOff, CATFloat32 yOff, bool leftBtn, bool midBtn, bool rightBtn);
@@ -71,6 +72,8 @@ protected:
 	CATMutex				 fMutex;
 	CATImage* fCurImage;
 	CATVideoCapture	 fCapture;
+		
+	CBMagInfo fProcessor;
 
 
 	// 3D window / OpenGL
@@ -84,7 +87,6 @@ protected:
 
 
 	// Viewport positions
-	CATFloat32  fRotateSpeed;
 	CATFloat32	fViewX;
 	CATFloat32	fViewY;
 	CATFloat32	fViewZ;
@@ -100,6 +102,10 @@ protected:
 	CATFloat32  fMinZ;
 	CATFloat32  fMaxZ;
 
+	CATFilterAttackDecay fRotZFilter;
+	CATFilterAttackDecay fRotXFilter;
+	CATFilterAttackDecay fRotYFilter;
+
 	// Flags for rotation
 	CATInt32	fLastMouseX;
 	CATInt32	fLastMouseY;
@@ -108,6 +114,7 @@ protected:
 	bool		f3DXYRotating;
 	bool		f3DZTranslating;
 	bool		f3DZRotating;
+	bool		fIsProcDirty;
 };
 
 #endif //CAT3DVideo_H

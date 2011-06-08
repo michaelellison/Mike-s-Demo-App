@@ -45,7 +45,6 @@
 #include "CATPictureMulti.h"
 #include "CAT3DView.h"
 #include "CAT3DVideo.h"
-#include "CATVideoCtrl.h"
 //---------------------------------------------------------------------------
 CATGuiFactory::CATGuiFactory(const CATString& skinRoot, const CATString& skinPath)
 : CATXMLFactory()
@@ -87,7 +86,6 @@ CATXMLObject* CATGuiFactory::CreateObject( const CATWChar* objType)
     else if (wcscmp(objType, L"Tab"      ) == 0 )  newObject = new CATTab     ( objType,  fSkinRoot);
     else if (wcscmp(objType, L"ComboBox" ) == 0 )  newObject = new CATComboBox( objType,  fSkinRoot);
 	 else if (wcscmp(objType, L"View3D"   ) == 0 )  newObject = new CAT3DView  ( objType,  fSkinRoot);
-	 else if (wcscmp(objType, L"Video"    ) == 0 )  newObject = new CATVideoCtrl ( objType,  fSkinRoot);
 	 else if (wcscmp(objType, L"Video3D"  ) == 0 )  newObject = new CAT3DVideo ( objType,  fSkinRoot);
     else
     {        

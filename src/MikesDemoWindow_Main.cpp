@@ -12,7 +12,6 @@
 #include "CAT3DVideo.h"
 #include "CATFileSystem.h"
 #include "CATMenu.h"
-#include "CATVideoCtrl.h"
 #include "CATTab.h"
 #include "CATTreeCtrl.h"
 #include "CATPictureMulti.h"
@@ -75,7 +74,6 @@ void MikesDemoWindow_Main::OnCreate()
 				{
 					// Display it and rotate it.
 					fView3d->Set3dFacets(this->f3dPoints, fPointScanScans,fPointScanHeight);
-					fView3d->SetRotateSpeed(2.0f);
 				}
 		 }
 	 }	 
@@ -89,59 +87,129 @@ void MikesDemoWindow_Main::OnDestroy()
     CATWindow::OnDestroy();
 }
 
+
+
+#define kMikesTableLen 8
+static MikesDemoWindow_Main::CATWINDOWCMDFUNC MikesCmdTable[kMikesTableLen] =
+{
+	{"DoLogoLink", (CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnLogoLink,	false, false},
+	{"TabSelect",	(CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnTabSelect,	false, false},
+	{"ProSelect",  (CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnProSelect,	false, false},
+	{"Go3d",			(CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnGo3d,      false, false},
+	{"Hue",        (CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnHue,       false, false},
+	{"Gamma",      (CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnGamma,     false, false},
+	{"Compress",   (CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnCompress,  false, false},
+	{"ColorSim",   (CATWindow::CATCOMMANDFUNC)&MikesDemoWindow_Main::OnColorSim,  false, false}
+};
+
 void MikesDemoWindow_Main::OnCommand(CATCommand& command, CATControl* ctrl)
 {
-    CATString commandString = command.GetCmdString();
-
-	 // Custom commands for the window here...
-	 if (0 == commandString.Compare(L"DoLogoLink"))
-	 {
-		 CATUInt32 linkIndex = 0;
-		 if (fProLogo)
-			 linkIndex = CATRound(fProLogo->GetValue());
-
-		 switch(linkIndex)
-		 {
-			case 0:
-				CATExecute(L"http://www.line6.com/podfarm");
-				break;
-			case 1:
-				CATExecute(L"http://www.reflectsystems.com");
-				break;
-			case 2:
-				CATExecute(L"http://www.freepatentsonline.com/6597381.html");
-				break;
-			case 3:
-				CATExecute(L"http://www.nadatech.com");
-				break;
-		 }
-
-	 }
-	 else if (0 == commandString.Compare(L"TabSelect"))
-	 {		 
-		 if (fTabCtrl)
-			fTabCtrl->SetCurTab((CATUInt32)command.GetValue());		
+    CATResult result = ProcessCommandTable(command,ctrl,&MikesCmdTable[0],kMikesTableLen,false);
+    if (CATFAILED(result))
 		 CATWindow::OnCommand(command,ctrl);
-	 }
-	 else if (0 == commandString.Compare(L"ProSelect"))
-	 {
-		   if (fProTree)
-			{
-				CATTREEINFO* curItem = fProTree->GetCurItem();
-				if (curItem)
-					OnProTreeChange((CATUInt32)curItem->DataPtr - 1);
-			}
-	 }
-	 else if (0 == commandString.Compare(L"Go3d"))
-	 {
-		 if (fTabCtrl)
-			 fTabCtrl->SetCurTab(2);
-		 CATWindow::OnCommand(CATCommand("TabSelect",2),ctrl);
-	 }
-	 else
-	 {
-		CATWindow::OnCommand(command,ctrl);
-	 }
+}
+
+void MikesDemoWindow_Main::OnLogoLink( CATCommand&   command, CATControl*   control)
+{
+	CATUInt32 linkIndex = 0;
+	if (fProLogo)
+		linkIndex = CATRound(fProLogo->GetValue());
+
+	switch(linkIndex)
+	{
+	case 0:
+		CATExecute(L"http://www.line6.com/podfarm");
+		break;
+	case 1:
+		CATExecute(L"http://www.reflectsystems.com");
+		break;
+	case 2:
+		CATExecute(L"http://www.freepatentsonline.com/6597381.html");
+		break;
+	case 3:
+		CATExecute(L"http://www.nadatech.com");
+		break;
+	}
+}
+
+void MikesDemoWindow_Main::OnTabSelect( CATCommand&   command, CATControl*   control)
+{
+	if (fTabCtrl)
+		fTabCtrl->SetCurTab((CATUInt32)command.GetValue());		
+	CATWindow::OnCommand(command,control);
+}
+
+void MikesDemoWindow_Main::OnProSelect( CATCommand&   command, CATControl*   control)
+{
+   if (fProTree)
+	{
+		CATTREEINFO* curItem = fProTree->GetCurItem();
+		if (curItem)
+			OnProTreeChange((CATUInt32)curItem->DataPtr - 1);
+	}
+}
+
+void MikesDemoWindow_Main::OnGo3d( CATCommand&   command, CATControl*   control)
+{
+	if (fTabCtrl)
+		fTabCtrl->SetCurTab(2);
+	CATWindow::OnCommand(CATCommand("TabSelect",2),control);
+}
+
+void MikesDemoWindow_Main::OnHue( CATCommand&   command, CATControl*   control)
+{
+	if (fView3d)
+		fView3d->GetImageProcessor()->SetHue(command.GetValue());
+}
+void MikesDemoWindow_Main::OnGamma( CATCommand&   command, CATControl*   control)
+{
+	if (fView3d)
+		fView3d->GetImageProcessor()->SetGamma(command.GetValue());
+}
+void MikesDemoWindow_Main::OnCompress( CATCommand&   command, CATControl*   control)
+{
+	if (fView3d)
+		fView3d->GetImageProcessor()->SetCompress(command.GetValue());
+}
+
+void MikesDemoWindow_Main::OnColorSim( CATCommand&   command, CATControl*   control)
+{
+	CATInt32 simInt = CATRound(command.GetValue());
+	switch (simInt)
+	{
+		case 0: // normal
+		{
+			fView3d->GetImageProcessor()->SetMergeType(CBMagInfo::MERGE_NONE);
+			fView3d->GetImageProcessor()->SetSeverity(0.0f);
+			MarkDirty();
+			break;
+		}
+
+		case 1: // red
+		{
+			fView3d->GetImageProcessor()->SetMergeType(CBMagInfo::MERGE_Red);
+			fView3d->GetImageProcessor()->SetSeverity(1.0f);
+			MarkDirty();
+			break;
+		}
+
+		case 2: // green
+		{
+			fView3d->GetImageProcessor()->SetMergeType(CBMagInfo::MERGE_Green);
+			fView3d->GetImageProcessor()->SetSeverity(1.0f);
+			MarkDirty();
+			break;
+		}
+
+		case 3: // blue
+		{
+			fView3d->GetImageProcessor()->SetMergeType(CBMagInfo::MERGE_Blue);
+			fView3d->GetImageProcessor()->SetSeverity(1.0f);
+			MarkDirty();
+			break;
+		}
+	}
+	CATWindow::OnCommand(command,control);
 }
 
 void MikesDemoWindow_Main::OnProTreeChange(CATUInt32 index)

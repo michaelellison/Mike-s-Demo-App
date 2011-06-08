@@ -280,12 +280,63 @@
         <Layer Name="3DTab" Width="745" Height="550" >
           <Video3D
               Name="Video3D"
-              XPos="0"
-              YPos="0"
-              Width="745"
-              Height="550"
+              XPos="CenterObject"
+              YPos="10"
+              Width="640"
+              Height="480"
               HintText="3D scan from my DIY 3d rotary laser scanner (on top of captured video if you've got it)"
               Cursor="Hand" />
+
+          <RadioButton
+            Name="Normal"
+            Command="ColorSim"
+            XPos="50"
+            YPos="500"
+            Image="normal_sw.png"
+            ImageOn="normal_sw_on.png"
+            RadioValue="0"
+            Cursor="Hand"
+            HintText="Normal (no simulation)"
+            ShowHintValue="False"
+          />
+          <RadioButton
+            Name="RedDef"
+            Command="ColorSim"
+            XPos="125"
+            YPos="500"
+            Image="red_def_sw.png"
+            ImageOn="red_def_sw_on.png"
+            RadioValue="1"
+            Cursor="Hand"
+            HintText="Red Deficiency Simulation"
+            ShowHintValue="False"
+          />
+          <RadioButton
+            Name="GreenDef"
+            Command="ColorSim"
+            XPos="275"
+            YPos="500"
+            Image="green_def_sw.png"
+            ImageOn="green_def_sw_on.png"
+            RadioValue="2"
+            Cursor="Hand"
+            HintText="Green Deficiency Simulation"
+            ShowHintValue="False"
+          />
+          
+          <RadioButton
+            Name="BlueDef"
+            Command="ColorSim"
+            XPos="425"
+            YPos="500"
+            Image="blue_def_sw.png"
+            ImageOn="blue_def_sw_on.png"
+            RadioValue="3"
+            Cursor="Hand"
+            HintText="Blue Deficiency Simulation"
+            ShowHintValue="False"
+          />
+
         </Layer>
       </Tab>
       

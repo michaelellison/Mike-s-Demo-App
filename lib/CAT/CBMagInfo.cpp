@@ -249,6 +249,143 @@ void CBMagInfo::ProcessImage    (    unsigned char*        rgbBuffer,
     }
 }
 
+void CBMagInfo::ProcessSwapRGBA (    unsigned char*        buf,
+                                     int                   imgWidth,
+                                     int                   imgHeight,
+                                     int                   xOff,
+                                     int                   yOff,
+												 unsigned char			  alpha)
+{
+    int x,y;
+
+    // Rebuild our lookup tables if something has changed.
+    if (this->fStructDirty)
+    {
+        BuildLookupTables();
+    }
+    
+    // per pixel for now - optimize into SIMD-type stuff
+    // later as much as possible per platform.
+    unsigned char tmp = 0;
+
+    unsigned char* dstPtr = buf;
+    
+    for (y = yOff; y < yOff + imgHeight; y++)
+    {		  
+        for (x = 0; x < imgWidth; x++)
+        {
+            // Get pixel            
+            unsigned char r,g,b,a;
+            CATUInt32 bg = *(CATUInt32*)dstPtr;            
+            r = (unsigned char)(bg >> 16);
+            g = (unsigned char)(bg >> 8);
+            b = (unsigned char)(bg);
+				a = alpha;
+				
+				
+            // Negate image
+            if (fInfo.fNegative)
+            {
+                b = 255 - b;
+                g = 255 - g;
+                r = 255 -r ;
+            }
+
+            // Swap colors first
+            switch (fInfo.fSwapType)
+            {
+                case SWAP_GREEN_BLUE: tmp = g; g = b; b = tmp; break;
+                case SWAP_RED_BLUE:   tmp = r; r = b; b = tmp; break;
+                case SWAP_RED_GREEN:  tmp = r; r = g; g = tmp; break;
+            }                
+
+            // Integer versions are much mo' faster, 
+            // big thanks to Jace/TBL for posting that info.
+            RGBtoHSI(r,g,b);
+
+            // -------- BIG NOTE - r,g,b are now hue, saturation, and intensity!!!!
+            // They are converted back by HSItoRGB.
+            
+            r = fHueLUT[r];
+
+            // Grey requested colors
+            if ((r < 22) || (r >= 234)) // red
+            {                
+                b = fIntLUTRed[b + g*256];
+                g = fSatLUTRed[g];
+            }            
+            else if (r < 64) // yellow
+            {
+                b = fIntLUTYellow[b + g*256];
+                g = fSatLUTYellow[g];
+            }
+            else if (r < 107) // green
+            {
+                b = fIntLUTGreen[b + g*256];
+                g = fSatLUTGreen[g];
+            }
+            else if (r < 150) // cyan
+            {
+                b = fIntLUTCyan[b + g*256];
+                g = fSatLUTCyan[g];
+            }
+            else if (r < 192) // blue
+            {
+                b = fIntLUTBlue[b + g*256];
+                g = fSatLUTBlue[g];
+            }
+            else // magenta
+            {
+                b = fIntLUTMagenta[b + g*256];
+                g = fSatLUTMagenta[g];
+            }
+
+            HSItoRGB(r,g,b);
+
+            // Process pixel - try to use LUTs as much as possible here
+            // instead of doing the calculations real-time.
+            // 
+            r =   fRedLUT[r];
+            g =   fGreenLUT[g];
+            b =   fBlueLUT[b];
+
+
+            // Merge colors if any of the modes are on.
+            switch (fInfo.fMergeType)
+            {                
+                case MERGE_Red:     
+                    r =  (unsigned char)((int)fSevLUT[r] + fMergeRedLUT[g + b*256]);
+                    break;                                                  
+                
+                case MERGE_Green:                         
+                    g =  (unsigned char)((int)fSevLUT[g] + fMergeGreenLUT[r + b*256]);                     
+                    break;
+                
+                case MERGE_Blue:  
+                    b = (unsigned char)((int)fSevLUT[b] + fMergeBlueLUT[r + g*256]); 
+                    break;
+                
+                // Can't do a single LUT in easy space, so use LUTs for intensities at least
+                case MERGE_ALL: 
+                    {
+                        unsigned char grey = (unsigned char)(((unsigned int)fGreyRedLUT[r] + fGreyGreenLUT[g] + fGreyBlueLUT[b]) * fInfo.fSeverity);
+                        r = (unsigned char)(fSevLUT[r]   + grey);
+                        g = (unsigned char)(fSevLUT[g] + grey);
+                        b = (unsigned char)(fSevLUT[b]  + grey);
+                    }
+                    break;
+            }
+
+            // get two in one... it'd be better to do 4, but ah well...
+            *(CATUInt32*)dstPtr = ((CATUInt32)r) | 
+					                   (((CATUInt32)g) << 8) |
+											 (((CATUInt32)b) << 16) |
+											 (((CATUInt32)a) << 24);
+
+				dstPtr+=4;
+        }
+    }
+}
 
 // Build gamma related lookups
 void CBMagInfo::BuildGamma(bool red, bool green, bool blue)

@@ -37,8 +37,20 @@ class MikesDemoWindow_Main : public CATWindow
 
         virtual void OnDestroy();
 
+		  // Command handlers
+			void OnLogoLink(	CATCommand&   command, CATControl*   control);
+			void OnTabSelect( CATCommand&   command, CATControl*   control);
+			void OnProSelect( CATCommand&   command, CATControl*   control);
+			void OnGo3d(		CATCommand&   command, CATControl*   control);
+			void OnHue(			CATCommand&   command, CATControl*   control);
+			void OnGamma(		CATCommand&   command, CATControl*   control);
+			void OnCompress(	CATCommand&   command, CATControl*   control);
+			void OnColorSim(	CATCommand&   command, CATControl*   control);
+
     protected:
-		void OnShow();
+		 
+		 
+		 void OnShow();
 		
 		// Controls (don't delete, and may be null)
 		CAT3DVideo*      fView3d;
@@ -62,6 +74,7 @@ class MikesDemoWindow_Main : public CATWindow
 		CATScanPoint*	fPointScanArray;
 		CATInt32			fPointScanHeight; // height of point scan (resolution height)
 		CATInt32			fPointScanScans;	// number of point scans (width)
+
 };
 #endif // MikesDemoWindow_Main_H_
 

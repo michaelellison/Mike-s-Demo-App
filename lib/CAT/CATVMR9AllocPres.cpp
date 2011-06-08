@@ -123,7 +123,7 @@ HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::InitializeDevice( DWORD_PTR dwUserID
 	if ((!lpNumBuffers) || (!lpAllocInfo))
 		return E_POINTER;
 
-	 fMutex.Wait();
+	fImageLock.Wait();
 	// Nuke existing surfaces
 	CleanSurfaces();
 
@@ -133,25 +133,25 @@ HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::InitializeDevice( DWORD_PTR dwUserID
 	{
 		CleanSurfaces();
 		*lpNumBuffers = 0;
-		fMutex.Release();
+		fImageLock.Release();
 		return hr;
 	}
 	
 	fSurfaceCount = *lpNumBuffers;
 
-	fMutex.Release();
+	fImageLock.Release();
 	return S_OK;
 }
 
 
 HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::TerminateDevice ( DWORD_PTR dwID)
 {
-	fMutex.Wait();
+	fImageLock.Wait();
 
 	CleanSurfaces();
 
 
-	fMutex.Release();
+	fImageLock.Release();
 	return S_OK;
 }    
 
@@ -163,13 +163,13 @@ HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::GetSurface( DWORD_PTR dwUserID, DWOR
 	
 	*lplpSurface = 0;
 
-	fMutex.Wait();	
+	fImageLock.Wait();	
 	if ((fSurfaces) && (SurfaceIndex < fSurfaceCount))
 	{
 		fSurfaces[SurfaceIndex]->AddRef();
 		*lplpSurface = fSurfaces[SurfaceIndex];
 	}	
-	fMutex.Release();
+	fImageLock.Release();
 
 	if (!(*lplpSurface))
 		return E_FAIL;
@@ -182,11 +182,11 @@ HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::AdviseNotify( IVMRSurfaceAllocatorNo
 	if (!lpIVMRSurfAllocNotify)
 		return E_POINTER;
 
-	fMutex.Wait();
+	fImageLock.Wait();
 
 	fNotify = lpIVMRSurfAllocNotify;
 
-	fMutex.Release();
+	fImageLock.Release();
 
 	return S_OK;
 }
@@ -206,7 +206,8 @@ HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::StopPresenting( DWORD_PTR dwUserID)
 
 HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::PresentImage( DWORD_PTR dwUserID, VMR9PresentationInfo *lpPresInfo)
 {	
-	fMutex.Wait();
+	if (CATFAILED(fImageLock.Wait(0)))
+		return S_OK;
 
 	// Copy data and/or display - lpPresInfo->lpSurf
 	HRESULT hr;
@@ -223,34 +224,33 @@ HRESULT STDMETHODCALLTYPE CATVMR9AllocPres::PresentImage( DWORD_PTR dwUserID, VM
 	if (SUCCEEDED(hr = fD3dDev->StretchRect(lpPresInfo->lpSurf,0,bb,&copyrect, D3DTEXF_NONE)))
 	{		
 		D3DLOCKED_RECT rect;
-		if (SUCCEEDED(hr = bb->LockRect(&rect,0,D3DLOCK_READONLY)))
+		if (SUCCEEDED(hr = bb->LockRect(&rect,0,D3DLOCK_READONLY|D3DLOCK_NO_DIRTY_UPDATE)))
 		{	
-			CATUInt32 color;
-			CATUInt32* src, *dst;
-			src = (CATUInt32*)rect.pBits;
-			dst = (CATUInt32*)fImage->GetRawDataPtr();
-
-			for (int y = h-1; y != 0; --y)
-			{
-				src = (CATUInt32*)((unsigned char*)rect.pBits+rect.Pitch*y);
-				for (int x = 0; x < w; x++)
-				{
-					color = *src++;
-					*dst++ = ((color & 0xff) << 16) |
-								((color & 0xff0000) >> 16) |
-								 (color & 0x00ff00) | 
-								 0xff000000;
-				}
+			
+			unsigned char* src, *dst;
+			dst = fImage->GetRawDataPtr();
+			src = (unsigned char*)rect.pBits+rect.Pitch*(h-1);
+			int step = w*4;
+			for (int y = 0; y < h; y++)
+			{				
+				memcpy(dst,src,step);
+				dst += step;
+				src -= (rect.Pitch);
 			}
+			bb->UnlockRect();
+			bb->Release();			
 
 			if (fCallback)
 				fCallback(fImage,fContext);
 
 		}	
-		bb->UnlockRect();
-		bb->Release();			
+		else
+		{
+			bb->Release();			
+		}
+
 	}
-	fMutex.Release();
+	fImageLock.Release();
 
 	return S_OK;
 }    
@@ -303,4 +303,13 @@ IDirect3DDevice9* CATVMR9AllocPres::GetDevice()
 HMONITOR CATVMR9AllocPres::GetMonitor()
 {
 	return this->fMonitor;
+}
+
+CATResult CATVMR9AllocPres::LockImage(CATUInt32 msWait)
+{
+	return fImageLock.Wait(msWait);
+}
+void CATVMR9AllocPres::ReleaseImage()
+{
+	fImageLock.Release();
 }
