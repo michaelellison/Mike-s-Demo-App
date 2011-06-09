@@ -143,7 +143,7 @@ CATResult CATTreeCtrl::OSAddItem( const CATString& displayText, CATTREEINFO* lis
         tvi.item.mask |= TVIF_IMAGE;
     }
 
-    listInfo->ItemHandle = (long)TreeView_InsertItem(fControlWnd,&tvi);
+    listInfo->ItemHandle = TreeView_InsertItem(fControlWnd,&tvi);
     tmpDisplay.ReleaseBuffer();
 
     if (listInfo->ItemHandle == 0)

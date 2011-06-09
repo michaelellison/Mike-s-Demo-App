@@ -22,12 +22,12 @@
 
 struct CATTREEINFO
 {
-    CATString             DisplayText;
-    void*                DataPtr;
-    struct CATTREEINFO*   Parent;
-    std::vector<CATTREEINFO*>   Children;
-    CATInt32               ItemHandle;
-    CATInt32					ImageNumber;
+    CATString                 DisplayText;
+    void*                     DataPtr;
+    struct CATTREEINFO*       Parent;
+    std::vector<CATTREEINFO*> Children;
+    void*                     ItemHandle;
+    CATInt32                  ImageNumber;
 };
 
 

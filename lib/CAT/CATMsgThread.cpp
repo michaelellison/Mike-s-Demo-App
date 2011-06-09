@@ -53,16 +53,16 @@ void CATMsgThread::OnThreadIdle()
 
 
 // Called when messages are received
-CATUInt32 CATMsgThread::OnThreadMessage(CATUInt32 msg, CATUInt32 wParam, CATUInt32 lParam)
+CATUInt32 CATMsgThread::OnThreadMessage(CATUInt32 msg, void* wParam, void* lParam)
 {    
     CATTRACE("On thread msg...");
     return 0;
 }
 
 // Posts a message to the thread
-bool CATMsgThread::Post(CATUInt32 msg, CATUInt32 wParam, CATUInt32 lParam)
+bool CATMsgThread::Post(CATUInt32 msg, void* wParam, void* lParam)
 {
-    if (::PostThreadMessage(fThreadId,msg,wParam,lParam))
+    if (::PostThreadMessage(fThreadId,msg,(WPARAM)wParam,(LPARAM)lParam))
         return true;
 
     return false;
@@ -85,7 +85,7 @@ void CATMsgThread::ThreadFunction()
             }
             else
             {
-                CATUInt32 result = OnThreadMessage(msg.message, (CATUInt32)msg.lParam, (CATUInt32)msg.wParam);
+                CATUInt32 result = OnThreadMessage(msg.message, (void*)msg.lParam, (void*)msg.wParam);
             }
         }
 

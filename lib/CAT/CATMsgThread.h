@@ -43,10 +43,10 @@ class CATMsgThread : protected CATThread
         virtual  void OnThreadIdle();
 
         /// Called when messages are received
-        virtual  CATUInt32 OnThreadMessage(CATUInt32 msg, CATUInt32 wParam, CATUInt32 lParam);
+        virtual  CATUInt32 OnThreadMessage(CATUInt32 msg, void* wParam, void* lParam);
 
         /// Posts a message to the thread
-        bool     Post(CATUInt32 msg, CATUInt32 wParam, CATUInt32 lParam);
+        bool     Post(CATUInt32 msg, void* wParam, void* lParam);
 	
     protected:
 		virtual	void ThreadFunction();

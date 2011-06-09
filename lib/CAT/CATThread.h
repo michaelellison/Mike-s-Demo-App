@@ -65,10 +65,10 @@ class CATThread
 		virtual	void ThreadFunction();
 
 	protected:
-        CATUInt32       fThreadId;          ///< thread id
-		HANDLE			fThreadHandle;		///< Thread handle
-		CATTHREADPROC	fCallback;          ///< Callback
-		void*			fUserParam;			///< User parameter for thread
+		CATUInt32		fThreadId;        ///< thread id
+		HANDLE			fThreadHandle;    ///< Thread handle
+		CATTHREADPROC	fCallback;        ///< Callback
+		void*				fUserParam;	      ///< User parameter for thread
 };
 
 #endif //CATThread_H
